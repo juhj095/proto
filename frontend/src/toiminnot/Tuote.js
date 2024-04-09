@@ -74,16 +74,15 @@ const Tuote = () => {
             </tr>
         </thead>
         <tbody>
-        {rows.map((row, index) => (
-            <tr key={index}>
-              <td>{row.vnr}</td>
-              <td>{row.tuotenimi}</td>
-              <td>{row.vahvuus}</td>
-              <td>{row.laakemuoto}</td>
-              <td>{row.pakkauskoko}</td>
-              <td>{row.tukku}</td>
+            <tr >
+              <td>{tuote.Tuotetunnus}</td>
+              <td>{tuote.Tuotenimi}</td>
+              <td>{tuote.Vahvuus}</td>
+              <td>{tuote.Muoto}</td>
+              <td>{tuote.Pakkauskoko}</td>
+              <td>{tuote.Tukku}</td>
             </tr>
-          ))}
+        
 
         </tbody>
         </table>  
