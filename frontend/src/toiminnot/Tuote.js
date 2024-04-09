@@ -66,6 +66,7 @@ const Tuote = () => {
       <table>
         <thead>
           <tr>
+            <th>ID</th>
             <th>Päivämäärä</th>
             <th>Toiminto</th>
             <th>Asiakas</th>
@@ -77,8 +78,9 @@ const Tuote = () => {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row, index) => (
-            <tr key={index}>
+          {rows.map((row) => (
+            <tr key={row.id}>
+              <td>{row.id}</td>
               <td>{row.paivamaara}</td>
               <td>{row.toiminto}</td>
               <td>{row.asiakas}</td>
