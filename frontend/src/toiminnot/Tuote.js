@@ -103,8 +103,8 @@ const Tuote = () => {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => (
-            <tr key={row.id}>
+          {rows.map((row, index) => (
+            <tr key={`data-row-${index}`} className={index % 2 === 0 ? 'light-gray-row' : 'gray-row'}>
               <td>{row.id}</td>
               <td>{row.paivamaara}</td>
               <td>{row.toiminto}</td>
@@ -118,6 +118,7 @@ const Tuote = () => {
           ))}
         </tbody>
       </table>
+
     </div>
   );
 };
