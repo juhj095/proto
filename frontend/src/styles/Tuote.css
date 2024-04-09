@@ -42,5 +42,12 @@ table {
     border-radius: 4px;
   }
   
+  tbody tr:nth-child(odd) {
+    background-color: #f0f0f0; /* Vaaleanharmaa tausta joka toisella rivillä */
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #d3d3d3; /* Tummempi tausta joka toisella rivillä */
+  }
 
   
