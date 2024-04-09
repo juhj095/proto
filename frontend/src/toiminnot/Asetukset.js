@@ -5,8 +5,8 @@ const Asetukset = () => {
   return (
     <div>
       <h2>Asetukset</h2>
-      <Link to="/uusituote">Luo uusi tuote</Link>
-      <Link to="/tulostus">Tulosta valitsemasi sivu</Link>
+      <p><Link to="/uusituote">Luo uusi tuote</Link></p>
+      <p><Link to="/tulostus">Tulosta valitsemasi sivu</Link></p>
     </div>
   );
 };
