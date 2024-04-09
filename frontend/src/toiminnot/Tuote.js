@@ -51,7 +51,31 @@ const Tuote = () => {
 
   return (
     <div>
-    
+        <table>
+        <thead>
+            <tr>
+            <th>VNR</th>
+            <th>TUOTENIMI</th>
+            <th>VAHVUUS</th>
+            <th>LÄÄKEMUOTO</th>
+            <th>PAKKAUSKOKO</th>
+            <th>TUKKU</th>
+            </tr>
+        </thead>
+        <tbody>
+        {rows.map((row, index) => (
+            <tr key={index}>
+              <td>{row.vnr}</td>
+              <td>{row.tuotenimi}</td>
+              <td>{row.vahvuus}</td>
+              <td>{row.laakemuoto}</td>
+              <td>{row.pakkauskoko}</td>
+              <td>{row.tukku}</td>
+            </tr>
+          ))}
+
+        </tbody>
+        </table>  
       <table>
         <thead>
           <tr>
