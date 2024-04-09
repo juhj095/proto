@@ -19,30 +19,28 @@ const getAllTuote = () => {
 const getAllMuutosloki = (tuoteNimi) => {
     const query = `
     SELECT 
-        Muutosloki.id AS Muutoslokin_id,
-        Muutosloki.aika AS Muutoslokin_aika,
-        Muutosloki.tekija AS Muutoslokin_tekija,
-        Muutosloki.muutos AS Muutoslokin_muutos,
-        Muutosloki.saldo AS Muutoslokin_saldo,
-        Tila.selite AS Tilanne,
-        Tuote.nimi AS Tuotteen_nimi,
-        Asiakas.nimi AS Asiakkaan_nimi,
-        Laakari.tunnus AS Laakarin_tunnus
+        Muutosloki.id,
+        Muutosloki.aika AS paivamaara,
+        Muutosloki.tekija,
+        Muutosloki.muutos,
+        Muutosloki.saldo,
+        Muutosloki.reseptiNro AS reseptinNro,
+        Tila.selite AS toiminto,
+        Asiakas.nimi AS asiakas,
+        Laakari.tunnus AS laakari
     FROM 
-        proto.Muutosloki
+        Muutosloki
     JOIN 
-        proto.Toimitus ON Muutosloki.Toimitus_id = Toimitus.id
+        Tuote ON Muutosloki.Tuote_id = Tuote.id
     JOIN 
-        proto.Tuote ON Toimitus.Tuote_id = Tuote.id
-    JOIN 
-        proto.Tila ON Muutosloki.Tila_id = Tila.id
+        Tila ON Muutosloki.Tila_id = Tila.id
     LEFT JOIN 
-        proto.Asiakas ON Toimitus.Asiakas_id = Asiakas.id
+        Asiakas ON Muutosloki.Asiakas_id = Asiakas.id
     LEFT JOIN 
-        proto.Laakari ON Toimitus.Laakari_id = Laakari.id
+        Laakari ON Muutosloki.Laakari_id = Laakari.id
     WHERE 
         Tuote.nimi=?`;
-    return executeSQL(query, [tuoteNimi]);
+    return executeGetSingleSQL(query, [tuoteNimi]);
 }
 
 module.exports = { getAllTuote, getAllMuutosloki };
