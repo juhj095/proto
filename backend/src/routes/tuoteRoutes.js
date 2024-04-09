@@ -3,6 +3,10 @@ const router = express.Router();
 
 const ctrl = require("../controllers/tuoteController");
 
+/*  Esimerkki
+    /api/tuotteet?nimi=Lääke1
+*/
+
 router.route("/api/tuotteet").get(ctrl.getAllTuote);
 
 /*  Esimerkki

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { getTuotteet } from '../api/tuoteApi';
+import '../styles/Tuote.css';
 
 const Tuote = (props) => {
   const { tuotteenNimi } = props;
