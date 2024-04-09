@@ -6,7 +6,7 @@ const Asetukset = () => {
     <div>
       <h2>Asetukset</h2>
       <Link to="/uusituote">Luo uusi tuote</Link>
-      <Link to="/tulostus">Luo uusi tuote</Link>
+      <Link to="/tulostus">Tulosta valitsemasi sivu</Link>
     </div>
   );
 };
