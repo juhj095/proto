@@ -42,5 +42,21 @@ table {
     border-radius: 4px;
   }
   
+.drugInfo {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  justify-content: space-around;
+  background-color: rgb(215, 215, 241);
+  border-bottom: 1px solid black;
+  border-top: 1px solid black;
+  text-align: center;
+  font-size: 2rem;
+}
 
-  
+.drugInfo > div > * {
+  margin: 10%;
+}
+
+.drugInfo > div > div:first-child {
+  font-size: 1rem;
+}

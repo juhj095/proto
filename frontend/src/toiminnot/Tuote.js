@@ -62,30 +62,32 @@ const Tuote = () => {
 
   return (
     <div>
-        <table>
-        <thead>
-            <tr>
-            <th>VNR</th>
-            <th>TUOTENIMI</th>
-            <th>VAHVUUS</th>
-            <th>LÄÄKEMUOTO</th>
-            <th>PAKKAUSKOKO</th>
-            <th>TUKKU</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr >
-              <td>{tuote.Tuotetunnus}</td>
-              <td>{tuote.Tuotenimi}</td>
-              <td>{tuote.Vahvuus}</td>
-              <td>{tuote.Muoto}</td>
-              <td>{tuote.Pakkauskoko}</td>
-              <td>{tuote.Tukku}</td>
-            </tr>
-        
-
-        </tbody>
-        </table>  
+        <div className='drugInfo'>
+          <div>
+            <div>VNR</div>
+            <div>{tuote.Tuotetunnus}</div>
+          </div>
+          <div>
+            <div>Tuotenimi</div>
+            <div>{tuote.Tuotenimi}</div>
+          </div>
+          <div>
+            <div>Vahvuus</div>
+            <div>{tuote.Vahvuus}</div>
+          </div>
+          <div>
+            <div>Lääkemuoto</div>
+            <div>{tuote.Muoto}</div>
+          </div>
+          <div>
+            <div>Pakkauskoko</div>
+            <div>{tuote.Pakkauskoko}</div>
+          </div>
+          <div>
+            <div>Tukku</div>
+            <div>{tuote.Tukku}</div>
+          </div>
+        </div>  
       <table>
         <thead>
           <tr>
