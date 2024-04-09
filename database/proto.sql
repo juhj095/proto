@@ -24,6 +24,7 @@ CREATE TABLE IF NOT EXISTS `proto`.`Tuote` (
   `vahvuus` VARCHAR(45) NOT NULL,
   `pakkauskoko` VARCHAR(45) NOT NULL,
   `muoto` VARCHAR(45) NOT NULL,
+  `tukku` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
@@ -127,8 +128,8 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `proto`;
-INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`) VALUES (1, '123', 'Lääke1', '10 mg', '28', 'Kapseli');
-INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`) VALUES (2, '234', 'Lääke2', '200 mg', '100', 'Kapseli');
+INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`, `tukku`) VALUES (1, '123', 'Lääke1', '10 mg', '28', 'Kapseli', 'Lääketukku');
+INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`, `tukku`) VALUES (2, '234', 'Lääke2', '200 mg', '100', 'Kapseli', 'Lääketukku');
 
 COMMIT;
 

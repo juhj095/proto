@@ -15,4 +15,6 @@ router.route("/api/tuotteet").get(ctrl.getAllTuote);
 
 router.route("/api/tuote").get(ctrl.getAllMuutosloki);
 
+router.route("/api/tuote/:tunnus").get(ctrl.getTuote);
+
 module.exports = router;
