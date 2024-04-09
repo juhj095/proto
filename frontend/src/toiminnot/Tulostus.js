@@ -1,17 +1,18 @@
 import React from 'react';
 
 const Tulostus = () => {
-  const handlePrint = () => {
-    window.print();
+  const openPrintDialog = () => {
+    const printWindow = window.open('', '_blank');
+    printWindow.document.write();
+    printWindow.document.close();
+    printWindow.print();
   };
 
   return (
     <div>
-      <h2>Tulostussivu</h2>
-      <p>Tämä on tulostettava sisältö.</p>
-      <button onClick={handlePrint}>Tulosta</button>
+      <button onClick={openPrintDialog}>Tulosta</button>
     </div>
   );
 };
 
-export {Tulostus} ;
+export { Tulostus };
