@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../styles/UusiTuote.css';
 
 const UusiTuote = ({ onSave }) => {
     const [VNR, setVNR] = useState('');
