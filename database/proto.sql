@@ -15,105 +15,121 @@ CREATE SCHEMA IF NOT EXISTS `proto` DEFAULT CHARACTER SET utf8 ;
 USE `proto` ;
 
 -- -----------------------------------------------------
--- Table `proto`.`Tuote`
+-- Table `proto`.`ProductName`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proto`.`Tuote` (
+CREATE TABLE IF NOT EXISTS `proto`.`ProductName` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `tunnus` VARCHAR(45) NOT NULL,
-  `nimi` VARCHAR(45) NOT NULL,
-  `vahvuus` VARCHAR(45) NOT NULL,
-  `pakkauskoko` VARCHAR(45) NOT NULL,
-  `muoto` VARCHAR(45) NOT NULL,
-  `tukku` VARCHAR(45) NOT NULL,
+  `name` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `proto`.`Tila`
+-- Table `proto`.`Product`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proto`.`Tila` (
+CREATE TABLE IF NOT EXISTS `proto`.`Product` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `selite` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `proto`.`Asiakas`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proto`.`Asiakas` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `nimi` VARCHAR(45) NOT NULL,
-  `tunnus` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `proto`.`Laakari`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proto`.`Laakari` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `tunnus` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `proto`.`Muutosloki`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proto`.`Muutosloki` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `Tila_id` INT NOT NULL,
-  `aika` DATETIME NULL,
-  `tekija` VARCHAR(45) NOT NULL,
-  `muutos` INT NOT NULL,
-  `saldo` INT NOT NULL,
-  `Tuote_id` INT NOT NULL,
-  `Asiakas_id` INT NULL,
-  `Laakari_id` INT NULL,
-  `reseptiNro` VARCHAR(45) NULL,
-  PRIMARY KEY (`id`, `Tila_id`, `Tuote_id`),
-  INDEX `fk_Muutosloki_Tila1_idx` (`Tila_id` ASC) VISIBLE,
-  INDEX `fk_Muutosloki_Tuote1_idx` (`Tuote_id` ASC) VISIBLE,
-  INDEX `fk_Muutosloki_Asiakas1_idx` (`Asiakas_id` ASC) VISIBLE,
-  INDEX `fk_Muutosloki_Laakari1_idx` (`Laakari_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Muutosloki_Tila1`
-    FOREIGN KEY (`Tila_id`)
-    REFERENCES `proto`.`Tila` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Muutosloki_Tuote1`
-    FOREIGN KEY (`Tuote_id`)
-    REFERENCES `proto`.`Tuote` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Muutosloki_Asiakas1`
-    FOREIGN KEY (`Asiakas_id`)
-    REFERENCES `proto`.`Asiakas` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Muutosloki_Laakari1`
-    FOREIGN KEY (`Laakari_id`)
-    REFERENCES `proto`.`Laakari` (`id`)
+  `code` VARCHAR(45) NOT NULL,
+  `strength` VARCHAR(45) NOT NULL,
+  `size` VARCHAR(45) NOT NULL,
+  `form` VARCHAR(45) NOT NULL,
+  `wholesale` VARCHAR(45) NOT NULL,
+  `ProductName_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `ProductName_id`),
+  INDEX `fk_Product_ProductName1_idx` (`ProductName_id` ASC) VISIBLE,
+  CONSTRAINT `fk_Product_ProductName1`
+    FOREIGN KEY (`ProductName_id`)
+    REFERENCES `proto`.`ProductName` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `proto`.`Inventaario`
+-- Table `proto`.`State`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proto`.`Inventaario` (
+CREATE TABLE IF NOT EXISTS `proto`.`State` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `Tuote_id` INT NOT NULL,
-  `maara` INT NOT NULL,
-  PRIMARY KEY (`id`, `Tuote_id`),
-  INDEX `fk_Inventaario_Tuote1_idx` (`Tuote_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Inventaario_Tuote1`
-    FOREIGN KEY (`Tuote_id`)
-    REFERENCES `proto`.`Tuote` (`id`)
+  `definition` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `proto`.`Doctor`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proto`.`Doctor` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `code` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `proto`.`Customer`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proto`.`Customer` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `name` VARCHAR(45) NOT NULL,
+  `code` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `proto`.`ChangeLog`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proto`.`ChangeLog` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `time` DATETIME NULL,
+  `changedBy` VARCHAR(45) NOT NULL,
+  `change` INT NOT NULL,
+  `quantity` INT NOT NULL,
+  `recipeNumber` VARCHAR(45) NULL,
+  `State_id` INT NOT NULL,
+  `Doctor_id` INT NULL,
+  `Customer_id` INT NULL,
+  `Product_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `State_id`, `Product_id`),
+  INDEX `fk_ChangeLog_State1_idx` (`State_id` ASC) VISIBLE,
+  INDEX `fk_ChangeLog_Doctor1_idx` (`Doctor_id` ASC) VISIBLE,
+  INDEX `fk_ChangeLog_Customer1_idx` (`Customer_id` ASC) VISIBLE,
+  INDEX `fk_ChangeLog_Product1_idx` (`Product_id` ASC) VISIBLE,
+  CONSTRAINT `fk_ChangeLog_State1`
+    FOREIGN KEY (`State_id`)
+    REFERENCES `proto`.`State` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ChangeLog_Doctor1`
+    FOREIGN KEY (`Doctor_id`)
+    REFERENCES `proto`.`Doctor` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ChangeLog_Customer1`
+    FOREIGN KEY (`Customer_id`)
+    REFERENCES `proto`.`Customer` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_ChangeLog_Product1`
+    FOREIGN KEY (`Product_id`)
+    REFERENCES `proto`.`Product` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `proto`.`Inventory`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proto`.`Inventory` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `quantity` INT NOT NULL,
+  `Product_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `Product_id`),
+  INDEX `fk_Inventory_Product1_idx` (`Product_id` ASC) VISIBLE,
+  CONSTRAINT `fk_Inventory_Product1`
+    FOREIGN KEY (`Product_id`)
+    REFERENCES `proto`.`Product` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -124,95 +140,120 @@ SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 
 -- -----------------------------------------------------
--- Data for table `proto`.`Tuote`
+-- Data for table `proto`.`ProductName`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `proto`;
-INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`, `tukku`) VALUES (1, '333', 'Lääke1', '10 mg', '28', 'Kapseli', 'Lääketukku');
-INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`, `tukku`) VALUES (2, '234', 'Lääke2', '200 mg', '100', 'Kapseli', 'Lääketukku');
-INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`, `tukku`) VALUES (3, '432', 'Lääke3', '500 mg', '120', 'Kapseli', 'Lääketukku');
-INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`, `tukku`) VALUES (4, '332', 'Lääke4', '250 mg', '1000', 'Tabletti', 'Lääketukku');
-INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`, `tukku`) VALUES (5, '112', 'Lääke5', '400 mg', '10', 'Jauhe', 'Lääketukku');
+INSERT INTO `proto`.`ProductName` (`id`, `name`) VALUES (1, 'Morfiini');
+INSERT INTO `proto`.`ProductName` (`id`, `name`) VALUES (2, 'Oksikodoni');
+INSERT INTO `proto`.`ProductName` (`id`, `name`) VALUES (3, 'Fentanyyli');
+INSERT INTO `proto`.`ProductName` (`id`, `name`) VALUES (4, 'Ketamiini');
+INSERT INTO `proto`.`ProductName` (`id`, `name`) VALUES (5, 'Kodeiini');
+INSERT INTO `proto`.`ProductName` (`id`, `name`) VALUES (6, 'Tramadoli');
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `proto`.`Tila`
+-- Data for table `proto`.`Product`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `proto`;
-INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Toimitettu');
-INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Peruutettu');
-INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Inventoitu');
-INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Saapunut');
-INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Hävitetty');
+INSERT INTO `proto`.`Product` (`id`, `code`, `strength`, `size`, `form`, `wholesale`, `ProductName_id`) VALUES (1, '333', '10 mg', '28', 'Kapseli', 'Lääketukku', 1);
+INSERT INTO `proto`.`Product` (`id`, `code`, `strength`, `size`, `form`, `wholesale`, `ProductName_id`) VALUES (2, '234', '200 mg', '100', 'Kapseli', 'Lääketukku', 1);
+INSERT INTO `proto`.`Product` (`id`, `code`, `strength`, `size`, `form`, `wholesale`, `ProductName_id`) VALUES (3, '432', '500 mg', '120', 'Kapseli', 'Lääketukku', 2);
+INSERT INTO `proto`.`Product` (`id`, `code`, `strength`, `size`, `form`, `wholesale`, `ProductName_id`) VALUES (4, '332', '250 mg', '1000', 'Tabletti', 'Lääketukku', 2);
+INSERT INTO `proto`.`Product` (`id`, `code`, `strength`, `size`, `form`, `wholesale`, `ProductName_id`) VALUES (5, '112', '400 mg', '10', 'Jauhe', 'Lääketukku', 3);
+INSERT INTO `proto`.`Product` (`id`, `code`, `strength`, `size`, `form`, `wholesale`, `ProductName_id`) VALUES (6, '345', '10 mg', '10', 'Kapseli', 'Oriola', 3);
+INSERT INTO `proto`.`Product` (`id`, `code`, `strength`, `size`, `form`, `wholesale`, `ProductName_id`) VALUES (7, '456', '100 mg', '30', 'Jauhe', 'Tamro', 4);
+INSERT INTO `proto`.`Product` (`id`, `code`, `strength`, `size`, `form`, `wholesale`, `ProductName_id`) VALUES (8, '678', '100 mg', '60', 'Kapseli', 'Oriola', 5);
+INSERT INTO `proto`.`Product` (`id`, `code`, `strength`, `size`, `form`, `wholesale`, `ProductName_id`) VALUES (9, '670', '1 mg', '100', 'Kapseli', 'Tamro', 5);
+INSERT INTO `proto`.`Product` (`id`, `code`, `strength`, `size`, `form`, `wholesale`, `ProductName_id`) VALUES (10, '947', '2 mg', '10', 'Jauhe', 'Lääketukku', 5);
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `proto`.`Asiakas`
+-- Data for table `proto`.`State`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `proto`;
-INSERT INTO `proto`.`Asiakas` (`id`, `nimi`, `tunnus`) VALUES (1, 'Matti Meikäläinen', '455674');
-INSERT INTO `proto`.`Asiakas` (`id`, `nimi`, `tunnus`) VALUES (2, 'Maija Meikäläinen', '345763');
-INSERT INTO `proto`.`Asiakas` (`id`, `nimi`, `tunnus`) VALUES (3, 'Anni Sirviö', '324321');
-INSERT INTO `proto`.`Asiakas` (`id`, `nimi`, `tunnus`) VALUES (4, 'Niina Ahola', '432212');
-INSERT INTO `proto`.`Asiakas` (`id`, `nimi`, `tunnus`) VALUES (5, 'Heikki Tuomonen', '554423');
+INSERT INTO `proto`.`State` (`id`, `definition`) VALUES (1, 'Toimitettu');
+INSERT INTO `proto`.`State` (`id`, `definition`) VALUES (2, 'Peruutettu');
+INSERT INTO `proto`.`State` (`id`, `definition`) VALUES (3, 'Inventoitu');
+INSERT INTO `proto`.`State` (`id`, `definition`) VALUES (4, 'Saapunut');
+INSERT INTO `proto`.`State` (`id`, `definition`) VALUES (5, 'Hävitetty');
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `proto`.`Laakari`
+-- Data for table `proto`.`Doctor`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `proto`;
-INSERT INTO `proto`.`Laakari` (`id`, `tunnus`) VALUES (1, '123 456');
-INSERT INTO `proto`.`Laakari` (`id`, `tunnus`) VALUES (2, '234 567');
-INSERT INTO `proto`.`Laakari` (`id`, `tunnus`) VALUES (3, '234 433');
-INSERT INTO `proto`.`Laakari` (`id`, `tunnus`) VALUES (4, '323 554');
-INSERT INTO `proto`.`Laakari` (`id`, `tunnus`) VALUES (5, '443 323');
+INSERT INTO `proto`.`Doctor` (`id`, `code`) VALUES (1, '123 456');
+INSERT INTO `proto`.`Doctor` (`id`, `code`) VALUES (2, '234 567');
+INSERT INTO `proto`.`Doctor` (`id`, `code`) VALUES (3, '234 433');
+INSERT INTO `proto`.`Doctor` (`id`, `code`) VALUES (4, '323 554');
+INSERT INTO `proto`.`Doctor` (`id`, `code`) VALUES (5, '443 323');
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `proto`.`Muutosloki`
+-- Data for table `proto`.`Customer`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `proto`;
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 1, NULL, 'EK', -1, 34, 1, 1, 1, '43234323');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 2, NULL, 'TS', 0, 70, 2, 2, 2, '32334323');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 1, NULL, 'PT', -2, 68, 3, 3, 3, '22345434');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 5, NULL, 'AH', -1, 87, 5, 4, 2, '11226544');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 4, NULL, 'KK', 2, 66, 4, 5, 4, '23478654');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 3, NULL, 'KK', 0, 34, 1, 1, 5, '23432123');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 1, NULL, 'EK', 5, 39, 1, 3, 1, '11335544');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 2, NULL, 'EK', 0, 70, 2, 3, 2, '76564344');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 5, NULL, 'KK', -5, 65, 2, 1, 3, '34543212');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 4, NULL, 'KK', 7, 72, 2, 5, 4, '87564433');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 1, NULL, 'PT', 5, 72, 3, 4, 5, '43454300');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 2, NULL, 'PT', 0, 72, 3, 1, 5, '43553211');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 3, NULL, 'EK', 0, 72, 3, NULL, 4, '34221222');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 4, NULL, 'TS', 7, 79, 3, 4, 4, '43234433');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 5, NULL, 'TS', -6, 32, 1, NULL, 5, '77665432');
+INSERT INTO `proto`.`Customer` (`id`, `name`, `code`) VALUES (1, 'Matti Meikäläinen', '455674');
+INSERT INTO `proto`.`Customer` (`id`, `name`, `code`) VALUES (2, 'Maija Meikäläinen', '345763');
+INSERT INTO `proto`.`Customer` (`id`, `name`, `code`) VALUES (3, 'Anni Sirviö', '324321');
+INSERT INTO `proto`.`Customer` (`id`, `name`, `code`) VALUES (4, 'Niina Ahola', '432212');
+INSERT INTO `proto`.`Customer` (`id`, `name`, `code`) VALUES (5, 'Heikki Tuomonen', '554423');
 
 COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `proto`.`Inventaario`
+-- Data for table `proto`.`ChangeLog`
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `proto`;
-INSERT INTO `proto`.`Inventaario` (`id`, `Tuote_id`, `maara`) VALUES (DEFAULT, 1, 34);
-INSERT INTO `proto`.`Inventaario` (`id`, `Tuote_id`, `maara`) VALUES (DEFAULT, 2, 70);
-INSERT INTO `proto`.`Inventaario` (`id`, `Tuote_id`, `maara`) VALUES (DEFAULT, 3, 55);
-INSERT INTO `proto`.`Inventaario` (`id`, `Tuote_id`, `maara`) VALUES (DEFAULT, 4, 68);
-INSERT INTO `proto`.`Inventaario` (`id`, `Tuote_id`, `maara`) VALUES (DEFAULT, 5, 15);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'EK', -1, 34, '43234323', 5, 1, 1, 1);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'TS', 0, 70, '32334323', 2, 3, 3, 2);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'PT', -2, 68, '22345434', 1, 4, 4, 5);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'AH', -1, 87, '11226544', 5, 2, 2, 3);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'KK', 2, 66, '23478654', 4, NULL, NULL, 4);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'KK', 0, 34, '23432123', 2, 3, 5, 6);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'EK', 5, 39, '11335544', 4, NULL, NULL, 7);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'EK', 0, 70, '76564344', 2, 1, 4, 5);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'KK', -5, 65, '34543212', 1, 3, 4, 9);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'KK', 7, 72, '87564433', 4, NULL, NULL, 4);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'PT', 5, 72, '43454300', 4, NULL, NULL, 3);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'PT', 0, 72, '43553211', 2, 1, 5, 3);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'EK', 0, 72, '34221222', 2, 3, 4, 8);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'TS', 7, 79, '43234433', 4, NULL, NULL, 7);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, NULL, 'TS', -6, 32, '77665432', 1, 3, 4, 5);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `proto`.`Inventory`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `proto`;
+INSERT INTO `proto`.`Inventory` (`id`, `quantity`, `Product_id`) VALUES (1, 34, 1);
+INSERT INTO `proto`.`Inventory` (`id`, `quantity`, `Product_id`) VALUES (2, 70, 2);
+INSERT INTO `proto`.`Inventory` (`id`, `quantity`, `Product_id`) VALUES (3, 55, 3);
+INSERT INTO `proto`.`Inventory` (`id`, `quantity`, `Product_id`) VALUES (4, 68, 4);
+INSERT INTO `proto`.`Inventory` (`id`, `quantity`, `Product_id`) VALUES (5, 15, 5);
+INSERT INTO `proto`.`Inventory` (`id`, `quantity`, `Product_id`) VALUES (6, 568, 6);
+INSERT INTO `proto`.`Inventory` (`id`, `quantity`, `Product_id`) VALUES (7, 6, 7);
+INSERT INTO `proto`.`Inventory` (`id`, `quantity`, `Product_id`) VALUES (8, 53, 8);
+INSERT INTO `proto`.`Inventory` (`id`, `quantity`, `Product_id`) VALUES (9, 34, 9);
+INSERT INTO `proto`.`Inventory` (`id`, `quantity`, `Product_id`) VALUES (10, 74, 10);
 
 COMMIT;
 

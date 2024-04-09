@@ -4,22 +4,24 @@ const getAllTuote = (tuoteNimi) => {
     let params = [];
     let query = `
     SELECT
-        Tuote.tunnus AS Tuotetunnus,
-        Tuote.nimi AS Tuotenimi,
-        Tuote.vahvuus AS Vahvuus,
-        Tuote.pakkauskoko AS Pakkauskoko,
-        Tuote.muoto AS Muoto,
-        Tuote.tukku AS Tukku,
-        Inventaario.maara AS Saldo
+        Product.code AS Tuotetunnus,
+        ProductName.name AS Tuotenimi,
+        Product.strength AS Vahvuus,
+        Product.size AS Pakkauskoko,
+        Product.form AS Muoto,
+        Product.wholesale AS Tukku,
+        Inventory.quantity AS Saldo
     FROM
-        Tuote
+        Product
+    LEFT JOIN
+        ProductName ON ProductName.id = Product.ProductName_id
     JOIN
-        Inventaario ON Inventaario.Tuote_id = Tuote.id
+        Inventory ON Inventory.Product_id = Product.id
     WHERE 1=1`;
     
     if (tuoteNimi) {
         params.push(`%${tuoteNimi}%`);
-        query += " AND Tuote.nimi LIKE ?"
+        query += " AND ProductName.name LIKE ?"
     }
     return executeSQL(query, params);
 }
@@ -27,19 +29,21 @@ const getAllTuote = (tuoteNimi) => {
 const getTuote = (tuoteTunnus) => {
     const query = `
     SELECT
-        Tuote.tunnus AS Tuotetunnus,
-        Tuote.nimi AS Tuotenimi,
-        Tuote.vahvuus AS Vahvuus,
-        Tuote.pakkauskoko AS Pakkauskoko,
-        Tuote.muoto AS Muoto,
-        Tuote.tukku AS Tukku,
-        Inventaario.maara AS Saldo
+        Product.code AS Tuotetunnus,
+        ProductName.name AS Tuotenimi,
+        Product.strength AS Vahvuus,
+        Product.size AS Pakkauskoko,
+        Product.form AS Muoto,
+        Product.wholesale AS Tukku,
+        Inventory.quantity AS Saldo
     FROM
-        Tuote
+        Product
+    LEFT JOIN
+        ProductName ON ProductName.id = Product.ProductName_id
     JOIN
-        Inventaario ON Inventaario.Tuote_id = Tuote.id
+        Inventory ON Inventory.Product_id = Product.id
     WHERE
-        Tuote.tunnus=?
+        Product.code=?
     `;
     return executeGetSingleSQL(query, [tuoteTunnus]);
 }
@@ -47,27 +51,27 @@ const getTuote = (tuoteTunnus) => {
 const getAllMuutosloki = (tunnus) => {
     const query = `
     SELECT 
-        Muutosloki.id,
-        Muutosloki.aika AS paivamaara,
-        Muutosloki.tekija,
-        Muutosloki.muutos,
-        Muutosloki.saldo,
-        Muutosloki.reseptiNro AS reseptinNro,
-        Tila.selite AS toiminto,
-        Asiakas.nimi AS asiakas,
-        Laakari.tunnus AS laakari
+        ChangeLog.id,
+        ChangeLog.time AS paivamaara,
+        ChangeLog.changedBy AS tekija,
+        ChangeLog.change AS muutos,
+        ChangeLog.quantity AS saldo,
+        ChangeLog.recipeNumber AS reseptinNro,
+        State.definition AS toiminto,
+        Customer.name AS asiakas,
+        Doctor.code AS laakari
     FROM 
-        Muutosloki
+        ChangeLog
     JOIN 
-        Tuote ON Muutosloki.Tuote_id = Tuote.id
+        Product ON ChangeLog.Product_id = Product.id
     JOIN 
-        Tila ON Muutosloki.Tila_id = Tila.id
+        State ON ChangeLog.State_id = State.id
     LEFT JOIN 
-        Asiakas ON Muutosloki.Asiakas_id = Asiakas.id
+        Customer ON ChangeLog.Customer_id = Customer.id
     LEFT JOIN 
-        Laakari ON Muutosloki.Laakari_id = Laakari.id
+        Doctor ON ChangeLog.Doctor_id = Doctor.id
     WHERE 
-        Tuote.tunnus=?`;
+        Product.code=?`;
     return executeSQL(query, [tunnus]);
 }
 
