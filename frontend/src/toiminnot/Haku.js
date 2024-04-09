@@ -54,7 +54,7 @@ const Haku = () => {
                 <p>Lääkemuoto: {tuote.Muoto}</p>
                 <p>Pakkauskoko: {tuote.Pakkauskoko}</p>
                 <p>Saldo: {tuote.Saldo}</p>
-                <NavLink to={`/tuote/${tuote.Tuotetunnus}`}>Näytä tuote</NavLink>
+                <NavLink to={`/tuote/${tuote.Tuotenimi}`}>Näytä tuote</NavLink>
               </div>
             ))}
           </div>
