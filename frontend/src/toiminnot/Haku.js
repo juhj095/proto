@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { getTuotteet } from '../api/tuoteApi';
+import { NavLink } from 'react-router-dom';
 
 const Haku = () => {
   const [hakuTerm, setHakuTerm] = useState('');
@@ -44,15 +45,23 @@ const Haku = () => {
       {hakuTulos.length > 0 && (
         <div>
           <h3>Hakutulokset:</h3>
-          <ul>
-            {hakuTulos.map((product) => (
-              <li key={product.id}>{product.name}</li>
+          <div>
+            {hakuTulos.map((tuote, index) => (
+              <div key={index}>
+                <p>Tuotetunnus: {tuote.Tuotetunnus}</p>
+                <p>Tuotenimi: {tuote.Tuotenimi}</p>
+                <p>Vahvuus: {tuote.Vahvuus}</p>
+                <p>Lääkemuoto: {tuote.Muoto}</p>
+                <p>Pakkauskoko: {tuote.Pakkauskoko}</p>
+                <p>Saldo: {tuote.Saldo}</p>
+                <NavLink to={`/tuote/${tuote.Tuotetunnus}`}>Näytä tuote</NavLink>
+              </div>
             ))}
-          </ul>
+          </div>
         </div>
       )}
     </div>
   );
 };
 
-export {Haku};
+export { Haku };

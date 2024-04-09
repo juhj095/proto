@@ -5,6 +5,7 @@ import { UusiTuote } from './toiminnot/UusiTuote';
 import { Haku } from './toiminnot/Haku';
 import { Asetukset } from './toiminnot/Asetukset';
 
+
 function App() {
   return (
     <Router>
@@ -13,7 +14,6 @@ function App() {
         <Route path='/uusituote' element={<UusiTuote/>}></Route>
         <Route path='/haku' element={<Haku/>}></Route>
         <Route path='/asetukset' element={<Asetukset/>}></Route>
-
       </Routes>
     </Router>
   );

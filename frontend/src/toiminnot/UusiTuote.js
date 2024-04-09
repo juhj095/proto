@@ -6,8 +6,6 @@ const UusiTuote = ({ onSave }) => {
     const [vahvuus, setVahvuus] = useState('');
     const [laakemuoto, setLaakemuoto] = useState('');
     const [pakkauskoko, setPakkauskoko] = useState('');
-    const [tukku, setTukku] = useState('');
-
 
     const saveTuote = () => {
         const tuote = {
@@ -49,10 +47,6 @@ const UusiTuote = ({ onSave }) => {
                                 <th>Pakkauskoko:</th>
                                 <td><input className="tuote-input" type='text' value={pakkauskoko} onChange={(e) => setPakkauskoko(e.target.value)} /></td>
                             </tr>
-                            <tr className='tuoteform-item'>
-                                <th>Tukku:</th>
-                                <td><input className="tuote-input" type='text' value={tukku} onChange={(e) => setTukku(e.target.value)} /></td>
-                            </tr>  
                         </tbody>
                     </table>
                 </div>
