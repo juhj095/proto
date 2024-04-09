@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { getTuotteet } from '../api/tuoteApi';
 import { NavLink } from 'react-router-dom';
+import '../styles/Haku.css';
 
 const Haku = () => {
   const [hakuTerm, setHakuTerm] = useState('');
