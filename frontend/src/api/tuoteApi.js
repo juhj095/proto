@@ -1,8 +1,10 @@
 const BASE_URL = "http://localhost:3004";
 
-export const getTuotteet = async () => {
+export const getTuotteet = async (tuoteNimi) => {
     try {
-        const response = await fetch(`${BASE_URL}/api/tuotteet`);
+        let url = `${BASE_URL}/api/tuotteet`;
+        if (tuoteNimi) url += "?nimi=" + tuoteNimi;
+        const response = await fetch(url);
         return response.json();
     } catch (error) {
         throw error;
