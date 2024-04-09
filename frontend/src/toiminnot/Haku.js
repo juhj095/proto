@@ -8,12 +8,11 @@ const Haku = () => {
   const [hakuTulos, setHakuTulos] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [hakuTyyppi, setHakuTyyppi] = useState('laakari');
 
   const handleSearch = async () => {
     setLoading(true);
     try {
-      const tuotteet = await getTuotteet(hakuTerm, hakuTyyppi);
+      const tuotteet = await getTuotteet(hakuTerm);
       setHakuTulos(tuotteet);
       setError(tuotteet.length === 0 ? 'Ei tuotteita löytynyt.' : '');
     } catch (error) {
@@ -33,11 +32,6 @@ const Haku = () => {
           onChange={(e) => setHakuTerm(e.target.value)}
           placeholder="Syötä hakutermi..."
         />
-        <select value={hakuTyyppi} onChange={(e) => setHakuTyyppi(e.target.value)}>
-          <option value="asiakas">Hae asiakkaan perusteella</option>
-          <option value="laakari">Hae lääkärin perusteella</option>
-          <option value="tuotenumero">Hae tuotteen numeron perusteella</option>
-        </select>
         <button onClick={handleSearch} disabled={loading}>
           {loading ? 'Haetaan...' : 'Hae'}
         </button>
