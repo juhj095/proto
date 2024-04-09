@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { getTuotteet } from '../api/tuoteApi';
 
-const Tuote = () => {
+const Tuote = (props) => {
+  const { tuotteenNimi } = props;
   const [rows, setRows] = useState([]);
   const [formData, setFormData] = useState({
     paivamaara: '',
@@ -12,6 +14,18 @@ const Tuote = () => {
     saldo: '',
     tekija: ''
   });
+
+  useEffect(() => {
+    const fetchData = async (tuotteenNimi) => {
+      try {
+        const response = await getTuotteet(tuotteenNimi);
+        setRows(response);
+      } catch (error) {
+        //TODO: show error
+      }
+    }
+    fetchData(tuotteenNimi);
+  }, [tuotteenNimi]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
