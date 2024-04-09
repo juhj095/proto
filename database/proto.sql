@@ -29,36 +29,6 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `proto`.`Tila`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proto`.`Tila` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `selite` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`id`))
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
--- Table `proto`.`Muutosloki`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `proto`.`Muutosloki` (
-  `id` INT NOT NULL AUTO_INCREMENT,
-  `Tila_id` INT NOT NULL,
-  `aika` DATETIME NULL,
-  `tekija` VARCHAR(45) NOT NULL,
-  `muutos` INT NOT NULL,
-  `saldo` INT NOT NULL,
-  PRIMARY KEY (`id`, `Tila_id`),
-  INDEX `fk_Muutosloki_Tila1_idx` (`Tila_id` ASC) VISIBLE,
-  CONSTRAINT `fk_Muutosloki_Tila1`
-    FOREIGN KEY (`Tila_id`)
-    REFERENCES `proto`.`Tila` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
--- -----------------------------------------------------
 -- Table `proto`.`Asiakas`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `proto`.`Asiakas` (
@@ -85,22 +55,15 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `proto`.`Toimitus` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `Tuote_id` INT NOT NULL,
-  `Muutosloki_id` INT NOT NULL,
   `Asiakas_id` INT NOT NULL,
   `Laakari_id` INT NOT NULL,
-  PRIMARY KEY (`id`, `Tuote_id`, `Muutosloki_id`, `Asiakas_id`, `Laakari_id`),
+  PRIMARY KEY (`id`, `Tuote_id`, `Asiakas_id`, `Laakari_id`),
   INDEX `fk_Toimitus_Tuote_idx` (`Tuote_id` ASC) VISIBLE,
-  INDEX `fk_Toimitus_Muutosloki1_idx` (`Muutosloki_id` ASC) VISIBLE,
   INDEX `fk_Toimitus_Asiakas1_idx` (`Asiakas_id` ASC) VISIBLE,
   INDEX `fk_Toimitus_Laakari1_idx` (`Laakari_id` ASC) VISIBLE,
   CONSTRAINT `fk_Toimitus_Tuote`
     FOREIGN KEY (`Tuote_id`)
     REFERENCES `proto`.`Tuote` (`id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
-  CONSTRAINT `fk_Toimitus_Muutosloki1`
-    FOREIGN KEY (`Muutosloki_id`)
-    REFERENCES `proto`.`Muutosloki` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_Toimitus_Asiakas1`
@@ -111,6 +74,43 @@ CREATE TABLE IF NOT EXISTS `proto`.`Toimitus` (
   CONSTRAINT `fk_Toimitus_Laakari1`
     FOREIGN KEY (`Laakari_id`)
     REFERENCES `proto`.`Laakari` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `proto`.`Tila`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proto`.`Tila` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `selite` VARCHAR(45) NOT NULL,
+  PRIMARY KEY (`id`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `proto`.`Muutosloki`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `proto`.`Muutosloki` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `Tila_id` INT NOT NULL,
+  `aika` DATETIME NULL,
+  `tekija` VARCHAR(45) NOT NULL,
+  `muutos` INT NOT NULL,
+  `saldo` INT NOT NULL,
+  `Toimitus_id` INT NOT NULL,
+  PRIMARY KEY (`id`, `Tila_id`, `Toimitus_id`),
+  INDEX `fk_Muutosloki_Tila1_idx` (`Tila_id` ASC) VISIBLE,
+  INDEX `fk_Muutosloki_Toimitus1_idx` (`Toimitus_id` ASC) VISIBLE,
+  CONSTRAINT `fk_Muutosloki_Tila1`
+    FOREIGN KEY (`Tila_id`)
+    REFERENCES `proto`.`Tila` (`id`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_Muutosloki_Toimitus1`
+    FOREIGN KEY (`Toimitus_id`)
+    REFERENCES `proto`.`Toimitus` (`id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
@@ -149,31 +149,6 @@ COMMIT;
 
 
 -- -----------------------------------------------------
--- Data for table `proto`.`Tila`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `proto`;
-INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Toimitettu');
-INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Peruutettu');
-INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Inventoitu');
-INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Saapunut');
-INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Hävitetty');
-
-COMMIT;
-
-
--- -----------------------------------------------------
--- Data for table `proto`.`Muutosloki`
--- -----------------------------------------------------
-START TRANSACTION;
-USE `proto`;
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`) VALUES (DEFAULT, 1, NULL, 'EK', -1, 34);
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`) VALUES (DEFAULT, 2, NULL, 'TS', 0, 70);
-
-COMMIT;
-
-
--- -----------------------------------------------------
 -- Data for table `proto`.`Asiakas`
 -- -----------------------------------------------------
 START TRANSACTION;
@@ -200,8 +175,33 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `proto`;
-INSERT INTO `proto`.`Toimitus` (`id`, `Tuote_id`, `Muutosloki_id`, `Asiakas_id`, `Laakari_id`) VALUES (DEFAULT, 1, 1, 1, 1);
-INSERT INTO `proto`.`Toimitus` (`id`, `Tuote_id`, `Muutosloki_id`, `Asiakas_id`, `Laakari_id`) VALUES (DEFAULT, 2, 2, 2, 2);
+INSERT INTO `proto`.`Toimitus` (`id`, `Tuote_id`, `Asiakas_id`, `Laakari_id`) VALUES (1, 1, 1, 1);
+INSERT INTO `proto`.`Toimitus` (`id`, `Tuote_id`, `Asiakas_id`, `Laakari_id`) VALUES (2, 2, 2, 2);
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `proto`.`Tila`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `proto`;
+INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Toimitettu');
+INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Peruutettu');
+INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Inventoitu');
+INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Saapunut');
+INSERT INTO `proto`.`Tila` (`id`, `selite`) VALUES (DEFAULT, 'Hävitetty');
+
+COMMIT;
+
+
+-- -----------------------------------------------------
+-- Data for table `proto`.`Muutosloki`
+-- -----------------------------------------------------
+START TRANSACTION;
+USE `proto`;
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Toimitus_id`) VALUES (DEFAULT, 1, NULL, 'EK', -1, 34, 1);
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Toimitus_id`) VALUES (DEFAULT, 2, NULL, 'TS', 0, 70, 2);
 
 COMMIT;
 
