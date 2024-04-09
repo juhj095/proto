@@ -1,5 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import '../styles/Asetukset.css';
+
 
 const Asetukset = () => {
   return (
