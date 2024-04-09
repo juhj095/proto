@@ -15,7 +15,7 @@ function App() {
         <Route path='/uusituote' element={<UusiTuote/>}></Route>
         <Route path='/haku' element={<Haku/>}></Route>
         <Route path='/asetukset' element={<Asetukset/>}></Route>
-        <Route path='/tuote/:tuotteenNimi' element={<Tuote/>}></Route>
+        <Route path='/tuote/:tunnus' element={<Tuote/>}></Route>
         <Route path='/tulostus' element={<Tulostus/>}></Route>
 
       </Routes>

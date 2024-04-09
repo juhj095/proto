@@ -1,10 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { getTuotteenMuutokset } from '../api/tuoteApi';
+import { getTuote, getTuotteenMuutokset } from '../api/tuoteApi';
 import '../styles/Tuote.css';
 import { useParams } from 'react-router-dom';
 
 const Tuote = () => {
-  const { tuotteenNimi } = useParams();
+  const { tunnus } = useParams();
+  const [tuote, setTuote] = useState({});
   const [rows, setRows] = useState([]);
   const [formData, setFormData] = useState({
     paivamaara: '',
@@ -18,16 +19,26 @@ const Tuote = () => {
   });
 
   useEffect(() => {
-    const fetchData = async (tuotteenNimi) => {
+    const fetchLogs = async (tunnus) => {
       try {
-        const response = await getTuotteenMuutokset(tuotteenNimi);
+        const response = await getTuotteenMuutokset(tunnus);
         setRows(response);
       } catch (error) {
         //TODO: show error
       }
     }
-    fetchData(tuotteenNimi);
-  }, [tuotteenNimi]);
+    const fetchTuote = async (tunnus) => {
+      try {
+        const response = await getTuote(tunnus);
+        setTuote(response);
+      } catch (error) {
+        //TODO: show error
+      }
+    }
+
+    fetchTuote(tunnus);
+    fetchLogs(tunnus);
+  }, [tunnus]);
 
   const handleChange = (e) => {
     const { name, value } = e.target;

@@ -11,9 +11,18 @@ export const getTuotteet = async (tuoteNimi) => {
     }
 }
 
-export const getTuotteenMuutokset = async (tuote) => {
+export const getTuotteenMuutokset = async (tunnus) => {
     try {
-        const response = await fetch(`${BASE_URL}/api/tuote?nimi=${tuote}`);
+        const response = await fetch(`${BASE_URL}/api/tuote?tunnus=${tunnus}`);
+        return response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const getTuote = async (tunnus) => {
+    try {
+        const response = await fetch(`${BASE_URL}/api/tuote/${tunnus}`);
         return response.json();
     } catch (error) {
         throw error;

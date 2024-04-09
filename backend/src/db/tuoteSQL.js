@@ -9,6 +9,7 @@ const getAllTuote = (tuoteNimi) => {
         Tuote.vahvuus AS Vahvuus,
         Tuote.pakkauskoko AS Pakkauskoko,
         Tuote.muoto AS Muoto,
+        Tuote.tukku AS Tukku,
         Inventaario.maara AS Saldo
     FROM
         Tuote
@@ -23,7 +24,27 @@ const getAllTuote = (tuoteNimi) => {
     return executeSQL(query, params);
 }
 
-const getAllMuutosloki = (tuoteNimi) => {
+const getTuote = (tuoteTunnus) => {
+    const query = `
+    SELECT
+        Tuote.tunnus AS Tuotetunnus,
+        Tuote.nimi AS Tuotenimi,
+        Tuote.vahvuus AS Vahvuus,
+        Tuote.pakkauskoko AS Pakkauskoko,
+        Tuote.muoto AS Muoto,
+        Tuote.tukku AS Tukku,
+        Inventaario.maara AS Saldo
+    FROM
+        Tuote
+    JOIN
+        Inventaario ON Inventaario.Tuote_id = Tuote.id
+    WHERE
+        Tuote.tunnus=?
+    `;
+    return executeGetSingleSQL(query, [tuoteTunnus]);
+}
+
+const getAllMuutosloki = (tunnus) => {
     const query = `
     SELECT 
         Muutosloki.id,
@@ -46,8 +67,8 @@ const getAllMuutosloki = (tuoteNimi) => {
     LEFT JOIN 
         Laakari ON Muutosloki.Laakari_id = Laakari.id
     WHERE 
-        Tuote.nimi=?`;
-    return executeSQL(query, [tuoteNimi]);
+        Tuote.tunnus=?`;
+    return executeSQL(query, [tunnus]);
 }
 
-module.exports = { getAllTuote, getAllMuutosloki };
+module.exports = { getAllTuote, getAllMuutosloki, getTuote };

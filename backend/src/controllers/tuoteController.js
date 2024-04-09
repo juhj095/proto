@@ -10,10 +10,10 @@ const getAllTuote = async (req, res) => {
     }
 }
 
-const getAllMuutosloki = async (req, res) => {
+const getTuote = async (req, res) => {
     try {
-        const { nimi } = req.query;
-        const result = await sql.getAllMuutosloki(nimi);
+        const { tunnus } = req.params;
+        const result = await sql.getTuote(tunnus);
         if (!result) return res.status(404).send();
         res.status(200).json(result);
     } catch (error) {
@@ -21,4 +21,15 @@ const getAllMuutosloki = async (req, res) => {
     }
 }
 
-module.exports = { getAllTuote, getAllMuutosloki };
+const getAllMuutosloki = async (req, res) => {
+    try {
+        const { tunnus } = req.query;
+        const result = await sql.getAllMuutosloki(tunnus);
+        if (!result) return res.status(404).send();
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).send();
+    }
+}
+
+module.exports = { getAllTuote, getAllMuutosloki, getTuote };
