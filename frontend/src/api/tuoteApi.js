@@ -13,7 +13,7 @@ export const getTuotteet = async (tuoteNimi) => {
 
 export const getTuotteenMuutokset = async (tunnus) => {
     try {
-        const response = await fetch(`${BASE_URL}/api/tuote?tunnus=${tunnus}`);
+        const response = await fetch(`${BASE_URL}/api/tuote/${tunnus}/muutosloki`);
         return response.json();
     } catch (error) {
         throw error;
@@ -23,6 +23,15 @@ export const getTuotteenMuutokset = async (tunnus) => {
 export const getTuote = async (tunnus) => {
     try {
         const response = await fetch(`${BASE_URL}/api/tuote/${tunnus}`);
+        return response.json();
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const getAllProductNames = async () => {
+    try {
+        const response = await fetch(`${BASE_URL}/api/tuotenimet`);
         return response.json();
     } catch (error) {
         throw error;

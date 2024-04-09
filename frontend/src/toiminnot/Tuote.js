@@ -104,14 +104,14 @@ const Tuote = () => {
         </thead>
         <tbody>
           {rows.map((row, index) => (
-            <tr key={`data-row-${index}`} className={index % 2 === 0 ? 'light-gray-row' : 'gray-row'}>
+            <tr key={index} className={index % 2 === 0 ? 'light-gray-row' : 'gray-row'}>
               <td>{row.id}</td>
-              <td>{row.paivamaara}</td>
+              <td>{new Date(row.paivamaara).toLocaleDateString('fi-FI')}</td>
               <td>{row.toiminto}</td>
               <td>{row.asiakas}</td>
               <td>{row.reseptinNro}</td>
               <td>{row.laakari}</td>
-              <td>{row.muutos}</td>
+              <td>{row.muutos > 0 && "+"}{row.muutos}</td>
               <td>{row.saldo}</td>
               <td>{row.tekija}</td>
             </tr>

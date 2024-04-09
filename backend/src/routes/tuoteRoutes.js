@@ -4,17 +4,15 @@ const router = express.Router();
 const ctrl = require("../controllers/tuoteController");
 
 /*  Esimerkki
-    /api/tuotteet?nimi=Lääke1
+    /api/tuotteet?nimi=oksi
 */
 
-router.route("/api/tuotteet").get(ctrl.getAllTuote);
+router.route("/api/tuotteet").get(ctrl.getProducts);
 
-/*  Esimerkki
-    /api/tuote?nimi=Lääke1
-*/
+router.route("/api/tuote/:tunnus/muutosloki").get(ctrl.getChangeLogs);
 
-router.route("/api/tuote").get(ctrl.getAllMuutosloki);
+router.route("/api/tuote/:tunnus").get(ctrl.getProductByCode);
 
-router.route("/api/tuote/:tunnus").get(ctrl.getTuote);
+router.route("/api/tuotenimet").get(ctrl.getAllProductNames);
 
 module.exports = router;

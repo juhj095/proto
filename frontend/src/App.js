@@ -11,9 +11,8 @@ function App() {
   return (
     <Router>
       <Routes> 
-        <Route path='/' element={<Tuote/>}></Route>
         <Route path='/uusituote' element={<UusiTuote/>}></Route>
-        <Route path='/haku' element={<Haku/>}></Route>
+        <Route path='/' element={<Haku/>}></Route>
         <Route path='/asetukset' element={<Asetukset/>}></Route>
         <Route path='/tuote/:tunnus' element={<Tuote/>}></Route>
         <Route path='/tulostus' element={<Tulostus/>}></Route>

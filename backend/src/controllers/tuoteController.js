@@ -1,19 +1,19 @@
 const sql = require("../db/tuoteSQL");
 
-const getAllTuote = async (req, res) => {
+const getProducts = async (req, res) => {
     try {
         const { nimi } = req.query;
-        const result = await sql.getAllTuote(nimi);
+        const result = await sql.getProducts(nimi);
         res.status(200).json(result);
     } catch (error) {
         res.status(500).send();
     }
 }
 
-const getTuote = async (req, res) => {
+const getProductByCode = async (req, res) => {
     try {
         const { tunnus } = req.params;
-        const result = await sql.getTuote(tunnus);
+        const result = await sql.getProductByCode(tunnus);
         if (!result) return res.status(404).send();
         res.status(200).json(result);
     } catch (error) {
@@ -21,10 +21,10 @@ const getTuote = async (req, res) => {
     }
 }
 
-const getAllMuutosloki = async (req, res) => {
+const getChangeLogs = async (req, res) => {
     try {
-        const { tunnus } = req.query;
-        const result = await sql.getAllMuutosloki(tunnus);
+        const { tunnus } = req.params;
+        const result = await sql.getChangeLogs(tunnus);
         if (!result) return res.status(404).send();
         res.status(200).json(result);
     } catch (error) {
@@ -32,4 +32,13 @@ const getAllMuutosloki = async (req, res) => {
     }
 }
 
-module.exports = { getAllTuote, getAllMuutosloki, getTuote };
+const getAllProductNames = async (req, res) => {
+    try {
+        const result = await sql.getAllProductNames();
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).send();
+    }
+}
+
+module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames };

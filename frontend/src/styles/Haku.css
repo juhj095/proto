@@ -1,0 +1,19 @@
+.productNames {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.productName {
+    flex: 1 1 25%;
+    max-width: 25%;
+    margin: 1rem;
+    background-color: #aedaa6;
+    border: 2px solid #6A704C;
+    padding: 1rem;
+}
+
+.productName:hover {
+    cursor: pointer;
+}

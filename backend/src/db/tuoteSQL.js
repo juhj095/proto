@@ -1,9 +1,10 @@
 const { executeSQL, executeGetSingleSQL } = require("./connection");
 
-const getAllTuote = (tuoteNimi) => {
+const getProducts = (tuoteNimi) => {
     let params = [];
     let query = `
     SELECT
+        Product.id,
         Product.code AS Tuotetunnus,
         ProductName.name AS Tuotenimi,
         Product.strength AS Vahvuus,
@@ -26,9 +27,10 @@ const getAllTuote = (tuoteNimi) => {
     return executeSQL(query, params);
 }
 
-const getTuote = (tuoteTunnus) => {
+const getProductByCode = (tuoteTunnus) => {
     const query = `
     SELECT
+        Product.id,
         Product.code AS Tuotetunnus,
         ProductName.name AS Tuotenimi,
         Product.strength AS Vahvuus,
@@ -48,7 +50,7 @@ const getTuote = (tuoteTunnus) => {
     return executeGetSingleSQL(query, [tuoteTunnus]);
 }
 
-const getAllMuutosloki = (tunnus) => {
+const getChangeLogs = (tunnus) => {
     const query = `
     SELECT 
         ChangeLog.id,
@@ -75,4 +77,9 @@ const getAllMuutosloki = (tunnus) => {
     return executeSQL(query, [tunnus]);
 }
 
-module.exports = { getAllTuote, getAllMuutosloki, getTuote };
+const getAllProductNames = () => {
+    const query = "SELECT * FROM ProductName";
+    return executeSQL(query, []);
+}
+
+module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames };
