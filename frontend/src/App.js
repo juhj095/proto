@@ -4,6 +4,7 @@ import { Routes, Route, BrowserRouter as Router } from 'react-router-dom';
 import { UusiTuote } from './toiminnot/UusiTuote';
 import { Haku } from './toiminnot/Haku';
 import { Asetukset } from './toiminnot/Asetukset';
+import { Tulostus } from './toiminnot/Tulostus';
 
 
 function App() {
@@ -15,6 +16,8 @@ function App() {
         <Route path='/haku' element={<Haku/>}></Route>
         <Route path='/asetukset' element={<Asetukset/>}></Route>
         <Route path='/tuote/:tuotteenNimi' element={<Tuote/>}></Route>
+        <Route path='/tulostus' element={<Tulostus/>}></Route>
+
       </Routes>
     </Router>
   );
