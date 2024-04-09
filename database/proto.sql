@@ -128,8 +128,11 @@ SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `proto`;
-INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`, `tukku`) VALUES (1, '123', 'Lääke1', '10 mg', '28', 'Kapseli', 'Lääketukku');
+INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`, `tukku`) VALUES (1, '333', 'Lääke1', '10 mg', '28', 'Kapseli', 'Lääketukku');
 INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`, `tukku`) VALUES (2, '234', 'Lääke2', '200 mg', '100', 'Kapseli', 'Lääketukku');
+INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`, `tukku`) VALUES (3, '432', 'Lääke3', '500 mg', '120', 'Kapseli', 'Lääketukku');
+INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`, `tukku`) VALUES (4, '332', 'Lääke4', '250 mg', '1000', 'Tabletti', 'Lääketukku');
+INSERT INTO `proto`.`Tuote` (`id`, `tunnus`, `nimi`, `vahvuus`, `pakkauskoko`, `muoto`, `tukku`) VALUES (5, '112', 'Lääke5', '400 mg', '10', 'Jauhe', 'Lääketukku');
 
 COMMIT;
 
@@ -155,6 +158,9 @@ START TRANSACTION;
 USE `proto`;
 INSERT INTO `proto`.`Asiakas` (`id`, `nimi`, `tunnus`) VALUES (1, 'Matti Meikäläinen', '455674');
 INSERT INTO `proto`.`Asiakas` (`id`, `nimi`, `tunnus`) VALUES (2, 'Maija Meikäläinen', '345763');
+INSERT INTO `proto`.`Asiakas` (`id`, `nimi`, `tunnus`) VALUES (3, 'Anni Sirviö', '324321');
+INSERT INTO `proto`.`Asiakas` (`id`, `nimi`, `tunnus`) VALUES (4, 'Niina Ahola', '432212');
+INSERT INTO `proto`.`Asiakas` (`id`, `nimi`, `tunnus`) VALUES (5, 'Heikki Tuomonen', '554423');
 
 COMMIT;
 
@@ -164,8 +170,11 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `proto`;
-INSERT INTO `proto`.`Laakari` (`id`, `tunnus`) VALUES (1, '123456');
-INSERT INTO `proto`.`Laakari` (`id`, `tunnus`) VALUES (2, '234567');
+INSERT INTO `proto`.`Laakari` (`id`, `tunnus`) VALUES (1, '123 456');
+INSERT INTO `proto`.`Laakari` (`id`, `tunnus`) VALUES (2, '234 567');
+INSERT INTO `proto`.`Laakari` (`id`, `tunnus`) VALUES (3, '234 433');
+INSERT INTO `proto`.`Laakari` (`id`, `tunnus`) VALUES (4, '323 554');
+INSERT INTO `proto`.`Laakari` (`id`, `tunnus`) VALUES (5, '443 323');
 
 COMMIT;
 
@@ -175,8 +184,21 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `proto`;
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 1, NULL, 'EK', -1, 34, 1, 1, 1, '1234124');
-INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 2, NULL, 'TS', 0, 70, 2, 2, 2, '1251256');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 1, NULL, 'EK', -1, 34, 1, 1, 1, '43234323');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 2, NULL, 'TS', 0, 70, 2, 2, 2, '32334323');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 1, NULL, 'PT', -2, 68, 3, 3, 3, '22345434');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 5, NULL, 'AH', -1, 87, 5, 4, 2, '11226544');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 4, NULL, 'KK', 2, 66, 4, 5, 4, '23478654');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 3, NULL, 'KK', 0, 34, 1, 1, 5, '23432123');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 1, NULL, 'EK', 5, 39, 1, 3, 1, '11335544');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 2, NULL, 'EK', 0, 70, 2, 3, 2, '76564344');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 5, NULL, 'KK', -5, 65, 2, 1, 3, '34543212');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 4, NULL, 'KK', 7, 72, 2, 5, 4, '87564433');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 1, NULL, 'PT', 5, 72, 3, 4, 5, '43454300');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 2, NULL, 'PT', 0, 72, 3, 1, 5, '43553211');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 3, NULL, 'EK', 0, 72, 3, NULL, 4, '34221222');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 4, NULL, 'TS', 7, 79, 3, 4, 4, '43234433');
+INSERT INTO `proto`.`Muutosloki` (`id`, `Tila_id`, `aika`, `tekija`, `muutos`, `saldo`, `Tuote_id`, `Asiakas_id`, `Laakari_id`, `reseptiNro`) VALUES (DEFAULT, 5, NULL, 'TS', -6, 32, 1, NULL, 5, '77665432');
 
 COMMIT;
 
@@ -188,6 +210,9 @@ START TRANSACTION;
 USE `proto`;
 INSERT INTO `proto`.`Inventaario` (`id`, `Tuote_id`, `maara`) VALUES (DEFAULT, 1, 34);
 INSERT INTO `proto`.`Inventaario` (`id`, `Tuote_id`, `maara`) VALUES (DEFAULT, 2, 70);
+INSERT INTO `proto`.`Inventaario` (`id`, `Tuote_id`, `maara`) VALUES (DEFAULT, 3, 55);
+INSERT INTO `proto`.`Inventaario` (`id`, `Tuote_id`, `maara`) VALUES (DEFAULT, 4, 68);
+INSERT INTO `proto`.`Inventaario` (`id`, `Tuote_id`, `maara`) VALUES (DEFAULT, 5, 15);
 
 COMMIT;
 
