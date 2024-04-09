@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { getTuotteet } from '../api/tuoteApi';
+import { getTuotteenMuutokset } from '../api/tuoteApi';
 import '../styles/Tuote.css';
+import { useParams } from 'react-router-dom';
 
-const Tuote = (props) => {
-  const { tuotteenNimi } = props;
+const Tuote = () => {
+  const { tuotteenNimi } = useParams();
   const [rows, setRows] = useState([]);
   const [formData, setFormData] = useState({
     paivamaara: '',
@@ -19,7 +20,7 @@ const Tuote = (props) => {
   useEffect(() => {
     const fetchData = async (tuotteenNimi) => {
       try {
-        const response = await getTuotteet(tuotteenNimi);
+        const response = await getTuotteenMuutokset(tuotteenNimi);
         setRows(response);
       } catch (error) {
         //TODO: show error
