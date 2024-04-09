@@ -1,19 +1,5 @@
 import React, { useState } from 'react';
-
-const BASE_URL = 'http://localhost:3004/api/tuotteet';
-
-const haeTuotteet = async (hakuTerm, hakuTyyppi) => {
-  try {
-    const response = await fetch(`${BASE_URL}?${hakuTyyppi}=${hakuTerm}`);
-    if (!response.ok) {
-      throw new Error('Tuotteiden haku epäonnistui');
-    }
-    const data = await response.json();
-    return data.tuotteet || [];
-  } catch (error) {
-    throw new Error('Virhe tuotteiden haussa: ' + error.message);
-  }
-};
+import { getTuotteet } from '../api/tuoteApi';
 
 const Haku = () => {
   const [hakuTerm, setHakuTerm] = useState('');
@@ -25,7 +11,7 @@ const Haku = () => {
   const handleSearch = async () => {
     setLoading(true);
     try {
-      const tuotteet = await haeTuotteet(hakuTerm, hakuTyyppi);
+      const tuotteet = await getTuotteet(hakuTerm, hakuTyyppi);
       setHakuTulos(tuotteet);
       setError(tuotteet.length === 0 ? 'Ei tuotteita löytynyt.' : '');
     } catch (error) {
