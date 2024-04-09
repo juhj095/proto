@@ -40,7 +40,7 @@ const getAllMuutosloki = (tuoteNimi) => {
         Laakari ON Muutosloki.Laakari_id = Laakari.id
     WHERE 
         Tuote.nimi=?`;
-    return executeGetSingleSQL(query, [tuoteNimi]);
+    return executeSQL(query, [tuoteNimi]);
 }
 
 module.exports = { getAllTuote, getAllMuutosloki };
