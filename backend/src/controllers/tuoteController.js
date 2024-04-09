@@ -2,7 +2,8 @@ const sql = require("../db/tuoteSQL");
 
 const getAllTuote = async (req, res) => {
     try {
-        const result = await sql.getAllTuote();
+        const { nimi } = req.query;
+        const result = await sql.getAllTuote(nimi);
         res.status(200).json(result);
     } catch (error) {
         res.status(500).send();

@@ -1,7 +1,8 @@
 const { executeSQL, executeGetSingleSQL } = require("./connection");
 
-const getAllTuote = () => {
-    const query = `
+const getAllTuote = (tuoteNimi) => {
+    let params = [];
+    let query = `
     SELECT
         Tuote.tunnus AS Tuotetunnus,
         Tuote.nimi AS Tuotenimi,
@@ -12,8 +13,14 @@ const getAllTuote = () => {
     FROM
         Tuote
     JOIN
-        Inventaario ON Inventaario.Tuote_id = Tuote.id`;
-    return executeSQL(query, []);
+        Inventaario ON Inventaario.Tuote_id = Tuote.id
+    WHERE 1=1`;
+    
+    if (tuoteNimi) {
+        params.push(`%${tuoteNimi}%`);
+        query += " AND Tuote.nimi LIKE ?"
+    }
+    return executeSQL(query, params);
 }
 
 const getAllMuutosloki = (tuoteNimi) => {
