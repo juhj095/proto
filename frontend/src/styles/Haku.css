@@ -2,18 +2,49 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    width: 100%;
+    width: 70%; 
+    margin: 0 auto; 
 }
 
 .productName {
     flex: 1 1 25%;
-    max-width: 25%;
+    max-width: 15%;
     margin: 1rem;
-    background-color: #aedaa6;
-    border: 2px solid #6A704C;
-    padding: 1rem;
+    background-color: #bfd1d4;
+    border: 2px solid #5b7a92;
+    padding: 2rem;
+    border-radius: 40px;
 }
 
 .productName:hover {
     cursor: pointer;
 }
+
+.h2{
+    justify-content: center;
+}
+
+.search-container {
+    max-width: 70%;
+    position: relative;
+    margin: 0 auto;
+    padding: 1px;
+    border-radius: 100px;
+    border: 1px solid transparent;
+    display: flex; 
+  }
+  
+  .search-container input[type="text"] {
+    flex: 1; 
+    padding-right: 40px; 
+    border-radius: 100px;
+  }
+  
+  .search-container button {
+    position: absolute;
+    top: 50%;
+    right: 200px; 
+    transform: translateY(-50%);
+    z-index: 1; 
+    border-radius: 100px;
+  }
