@@ -82,4 +82,9 @@ const getAllProductNames = () => {
     return executeSQL(query, []);
 }
 
-module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames };
+const getAllStates = () => {
+    const query = "SELECT * FROM State";
+    return executeSQL(query, []);
+}
+
+module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames, getAllStates };

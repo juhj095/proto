@@ -41,4 +41,13 @@ const getAllProductNames = async (req, res) => {
     }
 }
 
-module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames };
+const getAllStates = async (req, res) => {
+    try {
+        const result = await sql.getAllStates();
+        res.status(200).json(result);
+    } catch (error) {
+        res.status(500).send();
+    }
+}
+
+module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames, getAllStates };

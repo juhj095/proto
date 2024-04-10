@@ -15,4 +15,6 @@ router.route("/api/tuote/:tunnus").get(ctrl.getProductByCode);
 
 router.route("/api/tuotenimet").get(ctrl.getAllProductNames);
 
+router.route("/api/states").get(ctrl.getAllStates);
+
 module.exports = router;
