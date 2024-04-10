@@ -41,7 +41,7 @@ const Haku = () => {
     try {
       const tuotteet = await getTuotteet(productName);
       setHakuTulos(tuotteet);
-      setError(tuotteet.length === 0 ? 'Ei tuotteita löytynyt.' : '');
+      setError(tuotteet.length === 0 ? 'Ei löytynyt tuotteita.' : '');
     } catch (error) {
       setError('Tuotteiden hakeminen epäonnistui. Yritä uudelleen myöhemmin.');
     } finally {
@@ -51,7 +51,7 @@ const Haku = () => {
 
   return (
     <div>
-      <h2>Tuotehaku</h2>
+      <h1>Tuotehaku</h1>
       <div className='search-container'>
         <input className='search-container'
           type="text"
@@ -63,7 +63,7 @@ const Haku = () => {
           {loading ? 'Haetaan...' : 'Hae'}
         </button> 
       </div>
-      { hakuTulos.length > 0 && <button onClick={() => setHakuTulos([])}>Takaisin aineluetteloon</button>}
+      <div>{ hakuTulos.length > 0 && <button onClick={() => setHakuTulos([])}>Takaisin aineluetteloon</button>} </div>
       {error && <div>{error}</div>}
       {hakuTulos.length > 0 && (
         <div>
