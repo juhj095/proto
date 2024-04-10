@@ -8,4 +8,22 @@ nav {
     text-decoration: none; 
     margin-right: 30px; 
     color: black;
+    cursor: pointer;
 }
+
+@page {
+    size: auto;  
+    margin: 10px;   
+  }
+  
+  @media print {
+    body {
+      margin: 10px;
+    }
+  
+    header, footer {
+      display: none; 
+    }
+  }
+  
+  

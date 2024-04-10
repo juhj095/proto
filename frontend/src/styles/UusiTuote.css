@@ -47,3 +47,20 @@ h1 {
     margin-top: 20px; /* Lisää tilaa yläpuolelle */
     margin-bottom: 20px; /* Lisää tilaa alapuolelle */
 }
+
+@page {
+    size: auto; 
+    margin: 10px;  
+  }
+  
+  @media print {
+    body {
+      margin: 10px; 
+    }
+  
+    header, footer {
+      display: none; 
+    }
+  }
+  
+  

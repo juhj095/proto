@@ -94,6 +94,22 @@
   border-radius: 100px;
 }
 
+@page {
+  size: auto;  
+  margin: 10px; 
+}
+
+@media print {
+  body {
+    margin: 10px; 
+  }
+
+  header, footer {
+    display: none;
+  }
+}
+
+
 
 
 
