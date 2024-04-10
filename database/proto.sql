@@ -236,6 +236,22 @@ INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`
 INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-04-09 17:52:08', 'TS', 7, 79, '43234433', 4, NULL, NULL, 7);
 INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-04-09 17:52:08', 'TS', -6, 32, '77665432', 1, 3, 4, 5);
 INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-04-09 17:52:08', 'KK', 1, 80, '55676556', 4, 5, 2, 3);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-05-09 17:52:08', 'EK', -3, 67, '54345444', 2, 3, 2, 1);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-06-09 17:52:08', 'KK', +6, 76, '23432333', 1, 2, 1, 2);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-06-09 17:54:08', 'PK', +15, 91, '34234433', 4, 4, 5, 1);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-06-09 19:54:08', 'TS', -10, 81, '43223432', 5, 3, NULL, 1);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-07-09 17:54:08', 'EK', 0, 81, '4323444', 3, 1, NULL, 2);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-07-09 17:54:08', 'TS', +2, 83, '12323232', 1, 2, 1, 1);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-07-09 17:54:08', 'TS', 0, 83, '4323444', 2, 2, 4, 1);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-07-09 17:54:08', 'EK', 0, 83, '64636442', 3, 3, NULL, 1);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-08-09 17:54:08', 'PK', +4, 87, '34343234', 4, 4, NULL, 1);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-08-09 17:54:08', 'AH', -10, 77, '32123232', 5, 4, NULL, 1);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-08-09 17:54:08', 'AH', +1, 87, '23232111', 1, 1, 2, 1);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-08-09 17:54:08', 'AH', 0, 81, '12323222', 2, 2, 3, 2);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-08-09 17:54:08', 'PK', 0, 81, '1233322', 3, 3, 3, 2);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-09-09 17:54:08', 'EK', +9, 90, '2322211', 4, 5, NULL, 2);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-09-09 17:54:08', 'PK', -10, 80, '332211', 5, 2, NULL, 2);
+INSERT INTO `proto`.`ChangeLog` (`id`, `time`, `changedBy`, `change`, `quantity`, `recipeNumber`, `State_id`, `Doctor_id`, `Customer_id`, `Product_id`) VALUES (DEFAULT, '2024-09-09 17:54:08', 'PK', +5, 85, '5434444', 1, 1, 3, 2);
 
 COMMIT;
 
