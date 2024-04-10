@@ -73,6 +73,7 @@ const Tuote = () => {
 
   return (
     <div>
+      <h1>Raportointi</h1>
         <div className='drugInfo'>
           <div>
             <div>VNR</div>
