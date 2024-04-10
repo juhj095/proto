@@ -7,7 +7,7 @@ const Tuote = () => {
   const { tunnus } = useParams();
   const [tuote, setTuote] = useState({});
   const [rows, setRows] = useState([]);
-  const [formData, setFormData] = useState({
+  const [uusiMerkinta, setUusiMerkinta] = useState({
     paivamaara: '',
     toiminto: '',
     asiakas: '',
@@ -42,13 +42,15 @@ const Tuote = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
+    setUusiMerkinta({ ...uusiMerkinta, [name]: value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    setRows([...rows, formData]);
-    setFormData({
+    const currentDate = new Date().toISOString().split('T')[0]; 
+    const uusiMerkintaWithDate = { ...uusiMerkinta, paivamaara: currentDate };
+    setRows([...rows, uusiMerkintaWithDate]);
+    setUusiMerkinta({
       paivamaara: '',
       toiminto: '',
       asiakas: '',
@@ -116,11 +118,36 @@ const Tuote = () => {
               <td>{row.tekija}</td>
             </tr>
           ))}
+          <tr>
+            <td></td>
+            <td>
+              <input type="text" name="toiminto" value={uusiMerkinta.toiminto} onChange={handleChange} />
+            </td>
+            <td>
+              <input type="text" name="asiakas" value={uusiMerkinta.asiakas} onChange={handleChange} />
+            </td>
+            <td>
+              <input type="text" name="reseptinNro" value={uusiMerkinta.reseptinNro} onChange={handleChange} />
+            </td>
+            <td>
+              <input type="text" name="laakari" value={uusiMerkinta.laakari} onChange={handleChange} />
+            </td>
+            <td>
+              <input type="text" name="muutos" value={uusiMerkinta.muutos} onChange={handleChange} />
+            </td>
+            <td>
+              <input type="text" name="saldo" value={uusiMerkinta.saldo} onChange={handleChange} />
+            </td>
+            <td>
+              <input type="text" name="tekija" value={uusiMerkinta.tekija} onChange={handleChange} />
+            </td>
+          </tr>
         </tbody>
       </table>
 
+      <button onClick={handleSubmit}>Lisää merkintä</button>
     </div>
   );
 };
 
-export {Tuote}
+export { Tuote }
