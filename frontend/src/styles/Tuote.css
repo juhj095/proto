@@ -107,6 +107,9 @@
   header, footer {
     display: none;
   }
+  .search-container {
+    display: none;
+  }
 }
 
 

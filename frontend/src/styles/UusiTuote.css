@@ -57,10 +57,12 @@ h1 {
     body {
       margin: 10px; 
     }
-  
     header, footer {
       display: none; 
     }
+    .search-container {
+        display: none;
+      }
   }
   
   
