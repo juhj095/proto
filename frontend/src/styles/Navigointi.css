@@ -6,5 +6,6 @@ nav {
 }
 .navLink {
     text-decoration: none; 
-    margin-right: 10px; 
+    margin-right: 30px; 
+    color: black;
 }
