@@ -13,16 +13,31 @@ nav {
 
 @page {
     size: auto;  
-    margin: 10px;   
+    margin: 10px; 
   }
   
   @media print {
     body {
-      margin: 10px;
+      margin: 10px; 
     }
   
     header, footer {
-      display: none; 
+      display: none;
+    }
+    .search-container {
+      display: none;
+    }
+    nav {
+      display: none;
+    }
+    input:empty{
+      display: none;
+    }
+    button{
+      display: none;
+    }
+    select {
+      display: none;
     }
   }
   
