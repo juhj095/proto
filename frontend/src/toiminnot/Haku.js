@@ -51,7 +51,7 @@ const Haku = () => {
 
   return (
     <div>
-      <h2>Tuotehaku</h2>
+      <h1>Tuotehaku</h1>
       <div className='search-container'>
         <input className='search-container'
           type="text"
