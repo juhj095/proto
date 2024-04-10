@@ -57,7 +57,7 @@ const UusiTuote = () => {
                 </table>
             </div>
             <div>
-                <button onClick={saveTuote}>Tallenna tuote</button>
+                <button className='tallenna-button'>Tallenna tuote</button>
             </div>
         </>
     );
