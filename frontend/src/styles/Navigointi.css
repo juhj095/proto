@@ -1,0 +1,10 @@
+nav {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #aedaa6;
+    padding: 15px;
+}
+.navLink {
+    text-decoration: none; 
+    margin-right: 10px; 
+}

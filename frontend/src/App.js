@@ -5,11 +5,13 @@ import { UusiTuote } from './toiminnot/UusiTuote';
 import { Haku } from './toiminnot/Haku';
 import { Asetukset } from './toiminnot/Asetukset';
 import { Tulostus } from './toiminnot/Tulostus';
+import {Navigointi} from './toiminnot/Navigointi';
 
 
 function App() {
   return (
     <Router>
+      <Navigointi/>
       <Routes> 
         <Route path='/uusituote' element={<UusiTuote/>}></Route>
         <Route path='/' element={<Haku/>}></Route>
