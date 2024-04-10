@@ -59,3 +59,16 @@ export const addChangeLog = async (changedBy, change, quantity, recipeNumber, st
         throw error;
     }
 }
+
+export const addProduct = async (code, strength, size, form, wholesale, productName) => {
+    try {
+        const body = { code, strength, size, form, wholesale, productName }
+        await fetch(`${BASE_URL}/api/uusi-tuote`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+    } catch (error) {
+        throw error;
+    }
+}

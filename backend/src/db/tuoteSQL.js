@@ -103,4 +103,14 @@ const addChangeLog = (changedBy, change, quantity, recipeNumber, stateId, doctor
     return executeSQL(query, [changedBy, change, quantity, recipeNumber, stateId, doctorId, customerId, productCode]);
 }
 
-module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames, getAllStates, addDoctor, addCustomer, addChangeLog };
+const addProductName = (name) => {
+    const query = "INSERT INTO ProductName (name) VALUES (?)";
+    return executeSQL(query, [name]);
+}
+
+const addProduct = (code, strength, size, form, wholesale, productNameId) => {
+    const query = "INSERT INTO Product (code, strength, size, form, wholesale, ProductName_id) VALUES (?,?,?,?,?,?)";
+    return executeSQL(query, [code, strength, size, form, wholesale, productNameId]);
+}
+
+module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames, getAllStates, addDoctor, addCustomer, addChangeLog, addProductName, addProduct };

@@ -15,16 +15,6 @@
     background-color: #ffffff; /* Tausta jokaiselle solulle */
 }
 
-/* Aktiivisen rivin tyyli */
-.table-container tr.active {
-    background-color: #f2f2f2;
-}
-
-/* Hover-tapahtuman tyyli */
-.table-container tbody > tr:hover {
-    background-color: #c3e7ee;
-}
-
 /* Input-kenttien tyyli */
 .tuote-input {
     width: 100%;
@@ -33,11 +23,27 @@
     border-radius: 4px;
 }
 
-/* Valkoinen tausta jokaiselle riville */
-.table-container tbody tr {
-    background-color: #ffffff;
+tbody > tr:hover {
+    background-color: #c3e7ee;
+  }
+
+h1 {
+    text-align: center;
+}
+button {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px; 
+    border-radius: 20px; 
+    font-size: 16px;
+    background-color: #c3e7ee; 
+    color: black;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
 }
 
-.table-container tbody > tr:hover {
-    background-color: #c3e7ee;
+.form-container {
+    margin-top: 20px; /* Lisää tilaa yläpuolelle */
+    margin-bottom: 20px; /* Lisää tilaa alapuolelle */
 }
