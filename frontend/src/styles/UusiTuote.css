@@ -30,7 +30,7 @@ tbody > tr:hover {
 h1 {
     text-align: center;
 }
-button {
+.tallenna-button {
     display: block;
     margin: 0 auto;
     padding: 10px 20px; 

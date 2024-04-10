@@ -47,7 +47,7 @@
     background-color: #ffffff; /* tausta joka toisella rivillä */
   }
   tbody > tr:hover {
-    background-color: #c3e7ee;
+    background-color: #bfd1d4;
   }
 .drugInfo {
   display: grid;
@@ -75,13 +75,14 @@
   padding: 1px;
   border-radius: 100px;
   border: 1px solid transparent;
-  display: flex; 
+  display: flex;
 }
 
 .search-container input[type="text"] {
   flex: 1; 
   padding-right: 40px; 
   border-radius: 100px;
+  background-color: #bfd1d4;
 }
 
 .search-container button {
