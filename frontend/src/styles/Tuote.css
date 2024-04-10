@@ -32,9 +32,7 @@
   }
   
   /* Hover-tapahtuman tyyli */
-  tr:hover {
-    background-color: #f2f2f2;
-  }
+  
   
   /* Input-kenttien tyyli */
   input[type="text"] {
@@ -51,6 +49,9 @@
   tbody tr:nth-child(even) {
     background-color: #ffffff; /* tausta joka toisella rivillä */
   }
+  tbody > tr:hover {
+    background-color: #c3e7ee;
+  }
 .drugInfo {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -59,7 +60,7 @@
   border-bottom: 1px solid black;
   border-top: 1px solid black;
   text-align: center;
-  font-size: 2rem;
+  font-size: 1.5rem;
 }
 
 .drugInfo > div > * {

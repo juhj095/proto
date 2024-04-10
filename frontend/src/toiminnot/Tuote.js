@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getTuote, getTuotteenMuutokset } from '../api/tuoteApi';
+import { getAllStates, getTuote, getTuotteenMuutokset } from '../api/tuoteApi';
 import '../styles/Tuote.css';
 import { useParams } from 'react-router-dom';
 
@@ -7,16 +7,14 @@ const Tuote = () => {
   const { tunnus } = useParams();
   const [tuote, setTuote] = useState({});
   const [rows, setRows] = useState([]);
-  const [uusiMerkinta, setUusiMerkinta] = useState({
-    paivamaara: '',
-    toiminto: '',
-    asiakas: '',
-    reseptinNro: '',
-    laakari: '',
-    muutos: '',
-    saldo: '',
-    tekija: ''
-  });
+  const [toiminnot, setToiminnot] = useState([]);
+  const [toiminto, setToiminto] = useState("");
+  const [asiakas, setAsiakas] = useState("");
+  const [reseptinNro, setReseptinNro] = useState("");
+  const [laakari, setLaakari] = useState("");
+  const [muutos, setMuutos] = useState("");
+  const [saldo, setSaldo] = useState("");
+  const [tekija, setTekija] = useState("");
 
   useEffect(() => {
     const fetchLogs = async (tunnus) => {
@@ -36,30 +34,22 @@ const Tuote = () => {
       }
     }
 
+    const fetchStates = async () => {
+      try {
+        const response = await getAllStates();
+        setToiminnot(response);
+      } catch (error) {
+        //TODO: show error
+      }
+    }
+
     fetchTuote(tunnus);
     fetchLogs(tunnus);
+    fetchStates();
   }, [tunnus]);
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setUusiMerkinta({ ...uusiMerkinta, [name]: value });
-  };
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const currentDate = new Date().toISOString().split('T')[0]; 
-    const uusiMerkintaWithDate = { ...uusiMerkinta, paivamaara: currentDate };
-    setRows([...rows, uusiMerkintaWithDate]);
-    setUusiMerkinta({
-      paivamaara: '',
-      toiminto: '',
-      asiakas: '',
-      reseptinNro: '',
-      laakari: '',
-      muutos: '',
-      saldo: '',
-      tekija: ''
-    });
+  const handleSubmit = () => {
+    // POST log
   };
 
   return (
@@ -120,26 +110,31 @@ const Tuote = () => {
           ))}
           <tr>
             <td></td>
+            <td></td>
             <td>
-              <input type="text" name="toiminto" value={uusiMerkinta.toiminto} onChange={handleChange} />
+              <select value={toiminto} onChange={(e) => setToiminto(e.target.value)}>
+                { toiminnot.map(t => (
+                  <option key={t.id}>{t.definition}</option>
+                ))}
+              </select>
             </td>
             <td>
-              <input type="text" name="asiakas" value={uusiMerkinta.asiakas} onChange={handleChange} />
+              <input type="text" name="asiakas" value={asiakas} onChange={(e) => setAsiakas(e.target.value)} />
             </td>
             <td>
-              <input type="text" name="reseptinNro" value={uusiMerkinta.reseptinNro} onChange={handleChange} />
+              <input type="text" name="reseptinNro" value={reseptinNro} onChange={(e) => setReseptinNro(e.target.value)} />
             </td>
             <td>
-              <input type="text" name="laakari" value={uusiMerkinta.laakari} onChange={handleChange} />
+              <input type="text" name="laakari" value={laakari} onChange={(e) => setLaakari(e.target.value)} />
             </td>
             <td>
-              <input type="text" name="muutos" value={uusiMerkinta.muutos} onChange={handleChange} />
+              <input type="text" name="muutos" value={muutos} onChange={(e) => setMuutos((e.target.value))} />
             </td>
             <td>
-              <input type="text" name="saldo" value={uusiMerkinta.saldo} onChange={handleChange} />
+              <input type="text" name="saldo" value={saldo} onChange={(e) => setSaldo((e.target.value))} />
             </td>
             <td>
-              <input type="text" name="tekija" value={uusiMerkinta.tekija} onChange={handleChange} />
+              <input type="text" name="tekija" value={tekija} onChange={(e) => setTekija(e.target.value)} />
             </td>
           </tr>
         </tbody>
