@@ -1,10 +1,10 @@
 
 /* Taulukon tyyli */
  table {
-    width: auto;
+    width: 100%;
     margin: 0 auto; 
     border-collapse: collapse;
-    max-width: 90%;
+    max-width: 100%;
   }
   
   /* Taulukon otsikoiden tyyli */
@@ -33,14 +33,13 @@
   
   /* Hover-tapahtuman tyyli */
   
-  
-  /* Input-kenttien tyyli */
-  input[type="text"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
+    /* Input-kenttien tyyli */
+    input[type="text"] {
+      width: 100%;
+      padding: 8px;
+      border: 1px solid #ccc;
+    }
+
   
   tbody tr:nth-child(odd) {
     background-color: #94aaac; /* tausta joka toisella rivillä */
@@ -70,3 +69,35 @@
 .drugInfo > div > div:first-child {
   font-size: 1rem;
 }
+
+.search-container {
+  max-width: 70%;
+  position: relative;
+  margin: 0 auto;
+  padding: 1px;
+  border-radius: 100px;
+  border: 1px solid transparent;
+  display: flex; 
+}
+
+.search-container input[type="text"] {
+  flex: 1; 
+  padding-right: 40px; 
+  border-radius: 100px;
+}
+
+.search-container button {
+  position: absolute;
+  top: 50%;
+  right: 200px; 
+  transform: translateY(-50%);
+  z-index: 1; 
+  border-radius: 100px;
+}
+
+
+
+
+
+
+

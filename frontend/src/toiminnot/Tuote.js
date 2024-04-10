@@ -81,9 +81,9 @@ const Tuote = () => {
           </div>
         </div>  
         <div className="search-container">
-      <input
+      <input className='search-container'
         type="text"
-        placeholder="Hae..."
+        placeholder="Hae tuotteen tietoja..."
         value=""
         onChange={() => {}}
       />
