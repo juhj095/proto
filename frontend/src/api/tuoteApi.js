@@ -37,3 +37,12 @@ export const getAllProductNames = async () => {
         throw error;
     }
 }
+
+export const getAllStates = async () => {
+    try {
+        const response = await fetch(`${BASE_URL}/api/states`);
+        return response.json();
+    } catch (error) {
+        throw error;
+    }
+}

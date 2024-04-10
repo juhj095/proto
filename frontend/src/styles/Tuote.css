@@ -43,17 +43,17 @@ table {
   }
   
   tbody tr:nth-child(odd) {
-    background-color: #f0f0f0; /* Vaaleanharmaa tausta joka toisella rivillä */
+    background-color: #94aaac; /* tausta joka toisella rivillä */
   }
   
   tbody tr:nth-child(even) {
-    background-color: #d3d3d3; /* Tummempi tausta joka toisella rivillä */
+    background-color: #ffffff; /* tausta joka toisella rivillä */
   }
 .drugInfo {
   display: grid;
   grid-template-columns: repeat(6, 1fr);
   justify-content: space-around;
-  background-color: rgb(215, 215, 241);
+  background-color: rgb(255, 255, 255);
   border-bottom: 1px solid black;
   border-top: 1px solid black;
   text-align: center;
