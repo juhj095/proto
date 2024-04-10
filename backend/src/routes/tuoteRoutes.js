@@ -17,4 +17,8 @@ router.route("/api/tuotenimet").get(ctrl.getAllProductNames);
 
 router.route("/api/states").get(ctrl.getAllStates);
 
+router.route("/api/add-changelog").post(ctrl.addChangeLog);
+
+router.route("/api/uusi-tuote").post(ctrl.addProduct);
+
 module.exports = router;

@@ -46,3 +46,29 @@ export const getAllStates = async () => {
         throw error;
     }
 }
+
+export const addChangeLog = async (changedBy, change, quantity, recipeNumber, stateId, doctor, customer, productCode) => {
+    try {
+        const body = { changedBy, change, quantity, recipeNumber, stateId, doctor, customer, productCode }
+        await fetch(`${BASE_URL}/api/add-changelog`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+    } catch (error) {
+        throw error;
+    }
+}
+
+export const addProduct = async (code, strength, size, form, wholesale, productName) => {
+    try {
+        const body = { code, strength, size, form, wholesale, productName }
+        await fetch(`${BASE_URL}/api/uusi-tuote`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+    } catch (error) {
+        throw error;
+    }
+}
