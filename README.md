@@ -30,7 +30,7 @@ Asenna frontend-sovelluksen riippuvuudet ja käynnistä se seuraavasti:
 ```bash
 cd polku kansioon/frontend
 npm install
-node start
+npm start
 ```
 
 Backend ja frontend pitää olla käynnissä samaan aikaan, että sovellus toimii. 
