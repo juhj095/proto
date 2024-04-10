@@ -23,9 +23,9 @@
     border-radius: 4px;
 }
 
-tbody > tr:hover {
-    background-color: #c3e7ee;
-  }
+.table-container tbody tr:hover {
+    background-color: #bfd1d4;
+}
 
 h1 {
     text-align: center;
