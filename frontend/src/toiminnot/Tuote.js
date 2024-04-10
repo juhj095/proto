@@ -90,6 +90,15 @@ const Tuote = () => {
             <div>{tuote.Tukku}</div>
           </div>
         </div>  
+        <div className="search-container">
+      <input
+        type="text"
+        placeholder="Hae..."
+        value=""
+        onChange={() => {}}
+      />
+      <button onClick={() => {}}>Hae</button>
+    </div>
       <table>
         <thead>
           <tr>
