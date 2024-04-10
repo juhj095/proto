@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { getAllStates, getTuote, getTuotteenMuutokset } from '../api/tuoteApi';
+import { addChangeLog, getAllStates, getTuote, getTuotteenMuutokset } from '../api/tuoteApi';
 import '../styles/Tuote.css';
 import { useParams } from 'react-router-dom';
 
@@ -16,15 +16,17 @@ const Tuote = () => {
   const [saldo, setSaldo] = useState("");
   const [tekija, setTekija] = useState("");
 
-  useEffect(() => {
-    const fetchLogs = async (tunnus) => {
-      try {
-        const response = await getTuotteenMuutokset(tunnus);
-        setRows(response);
-      } catch (error) {
-        //TODO: show error
-      }
+  const fetchLogs = async (tunnus) => {
+    try {
+      const response = await getTuotteenMuutokset(tunnus);
+      setRows(response);
+    } catch (error) {
+      //TODO: show error
     }
+  }
+
+  useEffect(() => {
+    
     const fetchTuote = async (tunnus) => {
       try {
         const response = await getTuote(tunnus);
@@ -38,6 +40,7 @@ const Tuote = () => {
       try {
         const response = await getAllStates();
         setToiminnot(response);
+        setToiminto(response[0].id);
       } catch (error) {
         //TODO: show error
       }
@@ -48,8 +51,24 @@ const Tuote = () => {
     fetchStates();
   }, [tunnus]);
 
-  const handleSubmit = () => {
-    // POST log
+  const handleSubmit = async () => {
+    try {
+      const muutosNumber = parseInt(muutos);
+      const saldoNumber = parseInt(saldo);
+      if (isNaN(muutosNumber) || isNaN(saldoNumber)) {
+        throw new Error('Invalid number format');
+      }
+      await addChangeLog(tekija, muutosNumber, saldoNumber, reseptinNro, toiminto, laakari, asiakas, tunnus);
+      fetchLogs(tunnus);
+      setAsiakas("");
+      setReseptinNro("");
+      setLaakari("");
+      setMuutos("");
+      setSaldo("");
+      setTekija("");
+    } catch (error) {
+      //TODO: show error
+    }
   };
 
   return (
@@ -114,7 +133,7 @@ const Tuote = () => {
             <td>
               <select value={toiminto} onChange={(e) => setToiminto(e.target.value)}>
                 { toiminnot.map(t => (
-                  <option key={t.id}>{t.definition}</option>
+                  <option key={t.id} value={t.id}>{t.definition}</option>
                 ))}
               </select>
             </td>

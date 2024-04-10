@@ -50,4 +50,18 @@ const getAllStates = async (req, res) => {
     }
 }
 
-module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames, getAllStates };
+const addChangeLog = async (req, res) => {
+    try {
+        const { changedBy, change, quantity, recipeNumber, stateId, doctor, customer, productCode } = req.body;
+        let doctorResult = {};
+        let customerResult = {};
+        if (doctor) doctorResult = await sql.addDoctor(doctor);
+        if (customer) customerResult = await sql.addCustomer(customer);
+        await sql.addChangeLog(changedBy, change, quantity, recipeNumber, stateId, doctorResult.insertId, customerResult.insertId, productCode);
+        res.status(201).send();
+    } catch (error) {
+        res.status(500).send();
+    }
+}
+
+module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames, getAllStates, addChangeLog };

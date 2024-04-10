@@ -46,3 +46,16 @@ export const getAllStates = async () => {
         throw error;
     }
 }
+
+export const addChangeLog = async (changedBy, change, quantity, recipeNumber, stateId, doctor, customer, productCode) => {
+    try {
+        const body = { changedBy, change, quantity, recipeNumber, stateId, doctor, customer, productCode }
+        await fetch(`${BASE_URL}/api/add-changelog`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(body)
+        });
+    } catch (error) {
+        throw error;
+    }
+}

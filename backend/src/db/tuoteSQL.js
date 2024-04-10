@@ -73,7 +73,8 @@ const getChangeLogs = (tunnus) => {
     LEFT JOIN 
         Doctor ON ChangeLog.Doctor_id = Doctor.id
     WHERE 
-        Product.code=?`;
+        Product.code=?
+    ORDER BY ChangeLog.time`;
     return executeSQL(query, [tunnus]);
 }
 
@@ -87,4 +88,19 @@ const getAllStates = () => {
     return executeSQL(query, []);
 }
 
-module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames, getAllStates };
+const addDoctor = (code) => {
+    const query = "INSERT INTO Doctor (code) VALUES (?)";
+    return executeSQL(query, [code]);
+}
+
+const addCustomer = (name) => {
+    const query = "INSERT INTO Customer (name, code) VALUES (?, 123)";
+    return executeSQL(query, [name]);
+}
+
+const addChangeLog = (changedBy, change, quantity, recipeNumber, stateId, doctorId, customerId, productCode) => {
+    const query = "INSERT INTO changelog (time, changedBy, `change`, quantity, recipeNumber, State_id, Doctor_id, Customer_id, Product_id) VALUES (NOW(), ?,?,?,?,?,?,?,(SELECT id FROM Product WHERE code = ? LIMIT 1))";
+    return executeSQL(query, [changedBy, change, quantity, recipeNumber, stateId, doctorId, customerId, productCode]);
+}
+
+module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames, getAllStates, addDoctor, addCustomer, addChangeLog };
