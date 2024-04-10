@@ -113,6 +113,18 @@
   .search-container {
     display: none;
   }
+  nav {
+    display: none;
+  }
+  input:empty{
+    display: none;
+  }
+  button{
+    display: none;
+  }
+  select {
+    display: none;
+  }
 }
 
 

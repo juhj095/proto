@@ -57,12 +57,26 @@ h1 {
     body {
       margin: 10px; 
     }
+  
     header, footer {
-      display: none; 
+      display: none;
     }
     .search-container {
-        display: none;
-      }
+      display: none;
+    }
+    nav {
+      display: none;
+    }
+    input:empty{
+      display: none;
+    }
+    button{
+      display: none;
+    }
+    select {
+      display: none;
+    }
   }
+  
   
   
