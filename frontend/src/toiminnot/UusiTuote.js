@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/Tuote.css';
+import '../styles/UusiTuote.css';
 
 const UusiTuote = ({ onSave }) => {
     const [VNR, setVNR] = useState('');
@@ -20,6 +20,8 @@ const UusiTuote = ({ onSave }) => {
         };
         onSave(tuote);
     };
+
+    const [hoveredRow, setHoveredRow] = useState(null);
 
     return (
         <div>

@@ -1,0 +1,43 @@
+/* Taulukon tyyli */
+.table-container {
+    width: 80%;
+    margin: 0 auto;
+    border-collapse: collapse;
+    max-width: 80%;
+}
+
+/* Taulukon solujen tyyli */
+.table-container th,
+.table-container td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+    background-color: #ffffff; /* Tausta jokaiselle solulle */
+}
+
+/* Aktiivisen rivin tyyli */
+.table-container tr.active {
+    background-color: #f2f2f2;
+}
+
+/* Hover-tapahtuman tyyli */
+.table-container tbody > tr:hover {
+    background-color: #c3e7ee;
+}
+
+/* Input-kenttien tyyli */
+.tuote-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+/* Valkoinen tausta jokaiselle riville */
+.table-container tbody tr {
+    background-color: #ffffff;
+}
+
+.table-container tbody > tr:hover {
+    background-color: #c3e7ee;
+}

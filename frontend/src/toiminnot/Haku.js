@@ -79,6 +79,7 @@ const Haku = () => {
                 <th>Saldo</th>
               </tr>
             </thead>
+            <tbody> 
             {hakuTulos.map((tuote) => (
               <tr key={tuote.id} onClick={() => navigate(`/tuote/${tuote.Tuotetunnus}`)}>
                   <td>{tuote.Tuotetunnus}</td>
@@ -89,6 +90,7 @@ const Haku = () => {
                   <td>{tuote.Saldo}</td>
               </tr>
             ))}
+            </tbody>
           </table>
         </div>
       )}
