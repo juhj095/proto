@@ -113,4 +113,14 @@ const addProduct = (code, strength, size, form, wholesale, productNameId) => {
     return executeSQL(query, [code, strength, size, form, wholesale, productNameId]);
 }
 
-module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames, getAllStates, addDoctor, addCustomer, addChangeLog, addProductName, addProduct };
+const addInventory = (quantity, productId) => {
+    const query = "INSERT INTO Inventory (quantity, Product_id) VALUES (?,?)";
+    return executeSQL(quantity, [quantity, productId]);
+}
+
+const changeInventory = (quantity, productCode) => {
+    const query = "UPDATE Inventory SET quantity=? WHERE Product_id=(SELECT id FROM Product WHERE code=?)";
+    return executeSQL(query, [quantity, productCode]);
+}
+
+module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames, getAllStates, addDoctor, addCustomer, addChangeLog, addProductName, addProduct, addInventory, changeInventory };

@@ -8,7 +8,6 @@ const Asetukset = () => {
     <div>
       <h2>Asetukset</h2>
       <p><Link to="/uusituote">Luo uusi tuote</Link></p>
-      <p><Link to="/tulostus">Tulosta valitsemasi sivu</Link></p>
     </div>
   );
 };

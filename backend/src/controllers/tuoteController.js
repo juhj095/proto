@@ -58,6 +58,7 @@ const addChangeLog = async (req, res) => {
         if (doctor) doctorResult = await sql.addDoctor(doctor);
         if (customer) customerResult = await sql.addCustomer(customer);
         await sql.addChangeLog(changedBy, change, quantity, recipeNumber, stateId, doctorResult.insertId, customerResult.insertId, productCode);
+        await sql.changeInventory(quantity, productCode);
         res.status(201).send();
     } catch (error) {
         res.status(500).send();
@@ -77,12 +78,14 @@ const addProduct = async (req, res) => {
             return false;
         });
 
+        let result;
         if (productNameExists) {
-            await sql.addProduct(code, strength, size, form, wholesale, productNameId);
+            result = await sql.addProduct(code, strength, size, form, wholesale, productNameId);
         } else {
             const productNameResult = await sql.addProductName(productName);
-            await sql.addProduct(code, strength, size, form, wholesale, productNameResult.insertId);
+            result = await sql.addProduct(code, strength, size, form, wholesale, productNameResult.insertId);
         }
+        await sql.addInventory(0, result.insertId);
         res.status(201).send();
     } catch (error) {
         res.status(500).send();
