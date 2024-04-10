@@ -41,7 +41,7 @@ const Haku = () => {
     try {
       const tuotteet = await getTuotteet(productName);
       setHakuTulos(tuotteet);
-      setError(tuotteet.length === 0 ? 'Ei tuotteita löytynyt.' : '');
+      setError(tuotteet.length === 0 ? 'Ei löytynyt tuotteita.' : '');
     } catch (error) {
       setError('Tuotteiden hakeminen epäonnistui. Yritä uudelleen myöhemmin.');
     } finally {

@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import '../styles/UusiTuote.css';
+import { addProduct } from '../api/tuoteApi';
+import { useNavigate } from 'react-router-dom';
 
 const UusiTuote = () => {
     const [VNR, setVNR] = useState('');
@@ -8,17 +10,15 @@ const UusiTuote = () => {
     const [laakemuoto, setLaakemuoto] = useState('');
     const [pakkauskoko, setPakkauskoko] = useState('');
     const [tukku, setTukku] = useState('');
+    const navigate = useNavigate();
 
-    const saveTuote = () => {
-        const tuote = {
-            VNR,
-            tuotenimi,
-            vahvuus,
-            laakemuoto,
-            pakkauskoko,
-            tukku
-        };
-        
+    const saveTuote = async () => {
+        try {
+            await addProduct(VNR, vahvuus, pakkauskoko, laakemuoto, tukku, tuotenimi);
+            navigate("/");
+        } catch (error) {
+            // TODO: show error
+        }
     };
 
     return (
@@ -57,7 +57,7 @@ const UusiTuote = () => {
                 </table>
             </div>
             <div>
-                <button className='tallenna-button'>Tallenna tuote</button>
+                <button className='tallenna-button' onClick={saveTuote}>Tallenna tuote</button>
             </div>
         </>
     );
