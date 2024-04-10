@@ -41,7 +41,7 @@ const Haku = () => {
     try {
       const tuotteet = await getTuotteet(productName);
       setHakuTulos(tuotteet);
-      setError(tuotteet.length === 0 ? 'Ei löytynyt tuotteita.' : '');
+      setError(tuotteet.length === 0 ? 'Ei tuotteita löytynyt.' : '');
     } catch (error) {
       setError('Tuotteiden hakeminen epäonnistui. Yritä uudelleen myöhemmin.');
     } finally {
@@ -59,7 +59,7 @@ const Haku = () => {
           onChange={(e) => setHakuTerm(e.target.value)}
           placeholder="Syötä hakutermi..."
         />
-        <button onClick={handleSearch} disabled={loading}>
+        <button className='haeButton' onClick={handleSearch} disabled={loading}>
           {loading ? 'Haetaan...' : 'Hae'}
         </button> 
       </div>
