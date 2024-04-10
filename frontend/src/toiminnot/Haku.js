@@ -63,7 +63,7 @@ const Haku = () => {
           {loading ? 'Haetaan...' : 'Hae'}
         </button> 
       </div>
-      { hakuTulos.length > 0 && <button onClick={() => setHakuTulos([])}>Takaisin aineluetteloon</button>}
+      <div>{ hakuTulos.length > 0 && <button onClick={() => setHakuTulos([])}>Takaisin aineluetteloon</button>} </div>
       {error && <div>{error}</div>}
       {hakuTulos.length > 0 && (
         <div>

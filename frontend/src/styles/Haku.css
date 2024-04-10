@@ -48,3 +48,7 @@
     z-index: 1; 
     border-radius: 100px;
   }
+
+  .takaisin-button{
+    justify-content: center;
+  }
