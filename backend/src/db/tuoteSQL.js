@@ -16,7 +16,7 @@ const getProducts = (tuoteNimi) => {
         Product
     LEFT JOIN
         ProductName ON ProductName.id = Product.ProductName_id
-    JOIN
+    LEFT JOIN
         Inventory ON Inventory.Product_id = Product.id
     WHERE 1=1`;
     
