@@ -64,4 +64,29 @@ const addChangeLog = async (req, res) => {
     }
 }
 
-module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames, getAllStates, addChangeLog };
+const addProduct = async (req, res) => {
+    try {
+        const { code, strength, size, form, wholesale, productName } = req.body;
+        const productNames =  await sql.getAllProductNames();
+        let productNameId = null;
+        const productNameExists = productNames.some(product => {
+            if (product.name === productName) {
+                productNameId = product.id;
+                return true;
+            }
+            return false;
+        });
+
+        if (productNameExists) {
+            await sql.addProduct(code, strength, size, form, wholesale, productNameId);
+        } else {
+            const productNameResult = await sql.addProductName(productName);
+            await sql.addProduct(code, strength, size, form, wholesale, productNameResult.insertId);
+        }
+        res.status(201).send();
+    } catch (error) {
+        res.status(500).send();
+    }
+}
+
+module.exports = { getProducts, getProductByCode, getChangeLogs, getAllProductNames, getAllStates, addChangeLog, addProduct };
