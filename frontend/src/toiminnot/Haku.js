@@ -59,7 +59,7 @@ const Haku = () => {
           onChange={(e) => setHakuTerm(e.target.value)}
           placeholder="Syötä hakutermi..."
         />
-        <button onClick={handleSearch} disabled={loading}>
+        <button className='haeButton' onClick={handleSearch} disabled={loading}>
           {loading ? 'Haetaan...' : 'Hae'}
         </button> 
       </div>

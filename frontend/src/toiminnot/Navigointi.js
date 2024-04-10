@@ -6,7 +6,7 @@ const Navigointi = () => {
     return(
         <nav>
             <div>
-                <NavLink className={"navLink"} to={"/"}>Etusivulle</NavLink>
+                <NavLink className={"navLink"} to={"/"}>Etusivu</NavLink>
             </div>
             <div>
                 <NavLink className={"navLink"} to={"/UusiTuote"}>Lisää tuote</NavLink>
