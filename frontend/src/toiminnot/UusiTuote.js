@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/Tuote.css';
+import '../styles/UusiTuote.css';
 
 const UusiTuote = ({ onSave }) => {
     const [VNR, setVNR] = useState('');
@@ -21,6 +21,8 @@ const UusiTuote = ({ onSave }) => {
         onSave(tuote);
     };
 
+    const [hoveredRow, setHoveredRow] = useState(null);
+
     return (
         <div className='tuoteform-body'>
             <div className='tuoteform'>
@@ -30,27 +32,27 @@ const UusiTuote = ({ onSave }) => {
                 <div className='tuoteform-mid'>
                     <table className='tuoteform-container'>
                         <tbody>
-                            <tr className='tuote-item'>
+                            <tr className='tuote-item' onMouseEnter={() => setHoveredRow(1)} onMouseLeave={() => setHoveredRow(null)} style={{ backgroundColor: hoveredRow === 1 ? '#c3e7ee' : '#ffffff' }}>
                                 <th>VNR:</th>
                                 <td><input className="tuote-input" type='text' value={VNR} onChange={(e) => setVNR(e.target.value)} /></td>
                             </tr>
-                            <tr className='tuoteform-item'>
+                            <tr className='tuoteform-item' onMouseEnter={() => setHoveredRow(2)} onMouseLeave={() => setHoveredRow(null)} style={{ backgroundColor: hoveredRow === 2 ? '#c3e7ee' : '#ffffff' }}>
                                 <th>Tuotenimi:</th>
                                 <td><input className="tuote-input" type='text' value={tuotenimi} onChange={(e) => setTuotenimi(e.target.value)} /></td>
                             </tr>
-                            <tr className='tuote-item'>
+                            <tr className='tuote-item' onMouseEnter={() => setHoveredRow(3)} onMouseLeave={() => setHoveredRow(null)} style={{ backgroundColor: hoveredRow === 3 ? '#c3e7ee' : '#ffffff' }}>
                                 <th>Vahvuus:</th>
                                 <td><input className="tuote-input" type='text' value={vahvuus} onChange={(e) => setVahvuus(e.target.value)} /></td>
                             </tr>
-                            <tr className='tuoteform-item'>
+                            <tr className='tuoteform-item' onMouseEnter={() => setHoveredRow(4)} onMouseLeave={() => setHoveredRow(null)} style={{ backgroundColor: hoveredRow === 4 ? '#c3e7ee' : '#ffffff' }}>
                                 <th>Lääkemuoto:</th>
                                 <td><input className="tuote-input" type='text' value={laakemuoto} onChange={(e) => setLaakemuoto(e.target.value)} /></td>
                             </tr>
-                            <tr className='tuoteform-item'>
+                            <tr className='tuoteform-item' onMouseEnter={() => setHoveredRow(5)} onMouseLeave={() => setHoveredRow(null)} style={{ backgroundColor: hoveredRow === 5 ? '#c3e7ee' : '#ffffff' }}>
                                 <th>Pakkauskoko:</th>
                                 <td><input className="tuote-input" type='text' value={pakkauskoko} onChange={(e) => setPakkauskoko(e.target.value)} /></td>
                             </tr>
-                            <tr className='tuoteform-item'>
+                            <tr className='tuoteform-item' onMouseEnter={() => setHoveredRow(6)} onMouseLeave={() => setHoveredRow(null)} style={{ backgroundColor: hoveredRow === 6 ? '#c3e7ee' : '#ffffff' }}>
                                 <th>Tukku:</th>
                                 <td><input className="tuote-input" type='text' value={tukku} onChange={(e) => setTukku(e.target.value)} /></td>
                             </tr>
@@ -65,4 +67,4 @@ const UusiTuote = ({ onSave }) => {
     );
 };
 
-export {UusiTuote};
+export { UusiTuote };

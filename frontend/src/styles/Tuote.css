@@ -1,10 +1,10 @@
 
 /* Taulukon tyyli */
  table {
-    width: auto;
+    width: 100%;
     margin: 0 auto; 
     border-collapse: collapse;
-    max-width: 90%;
+    max-width: 100%;
   }
   
   /* Taulukon otsikoiden tyyli */
