@@ -52,8 +52,8 @@ const Haku = () => {
   return (
     <div>
       <h2>Tuotehaku</h2>
-      <div>
-        <input
+      <div className='search-container'>
+        <input className='search-container'
           type="text"
           value={hakuTerm}
           onChange={(e) => setHakuTerm(e.target.value)}
@@ -61,9 +61,9 @@ const Haku = () => {
         />
         <button onClick={handleSearch} disabled={loading}>
           {loading ? 'Haetaan...' : 'Hae'}
-        </button>
-        { hakuTulos.length > 0 && <button onClick={() => setHakuTulos([])}>Takaisin aineluetteloon</button>}
+        </button> 
       </div>
+      { hakuTulos.length > 0 && <button onClick={() => setHakuTulos([])}>Takaisin aineluetteloon</button>}
       {error && <div>{error}</div>}
       {hakuTulos.length > 0 && (
         <div>
