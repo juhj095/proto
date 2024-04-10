@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../styles/Tuote.css';
+import '../styles/UusiTuote.css';
 
 const UusiTuote = ({ onSave }) => {
     const [VNR, setVNR] = useState('');
@@ -21,48 +21,50 @@ const UusiTuote = ({ onSave }) => {
         onSave(tuote);
     };
 
+    const [hoveredRow, setHoveredRow] = useState(null);
+
     return (
-        <div className='tuoteform-body'>
-            <div className='tuoteform'>
-                <div className='tuoteform-top'>
+        <div>
+            <div>
+                <div>
                     <h1>Uusi tuote:</h1>
                 </div>
-                <div className='tuoteform-mid'>
-                    <table className='tuoteform-container'>
+                <div>
+                    <table>
                         <tbody>
-                            <tr className='tuote-item'>
+                            <tr>
                                 <th>VNR:</th>
-                                <td><input className="tuote-input" type='text' value={VNR} onChange={(e) => setVNR(e.target.value)} /></td>
+                                <td><input type='text' value={VNR} onChange={(e) => setVNR(e.target.value)} /></td>
                             </tr>
-                            <tr className='tuoteform-item'>
+                            <tr>
                                 <th>Tuotenimi:</th>
-                                <td><input className="tuote-input" type='text' value={tuotenimi} onChange={(e) => setTuotenimi(e.target.value)} /></td>
+                                <td><input type='text' value={tuotenimi} onChange={(e) => setTuotenimi(e.target.value)} /></td>
                             </tr>
-                            <tr className='tuote-item'>
+                            <tr>
                                 <th>Vahvuus:</th>
-                                <td><input className="tuote-input" type='text' value={vahvuus} onChange={(e) => setVahvuus(e.target.value)} /></td>
+                                <td><input type='text' value={vahvuus} onChange={(e) => setVahvuus(e.target.value)} /></td>
                             </tr>
-                            <tr className='tuoteform-item'>
+                            <tr>
                                 <th>Lääkemuoto:</th>
-                                <td><input className="tuote-input" type='text' value={laakemuoto} onChange={(e) => setLaakemuoto(e.target.value)} /></td>
+                                <td><input type='text' value={laakemuoto} onChange={(e) => setLaakemuoto(e.target.value)} /></td>
                             </tr>
-                            <tr className='tuoteform-item'>
+                            <tr>
                                 <th>Pakkauskoko:</th>
-                                <td><input className="tuote-input" type='text' value={pakkauskoko} onChange={(e) => setPakkauskoko(e.target.value)} /></td>
+                                <td><input type='text' value={pakkauskoko} onChange={(e) => setPakkauskoko(e.target.value)} /></td>
                             </tr>
-                            <tr className='tuoteform-item'>
+                            <tr>
                                 <th>Tukku:</th>
-                                <td><input className="tuote-input" type='text' value={tukku} onChange={(e) => setTukku(e.target.value)} /></td>
+                                <td><input type='text' value={tukku} onChange={(e) => setTukku(e.target.value)} /></td>
                             </tr>
                         </tbody>
                     </table>
                 </div>
-                <div className='tuoteform-bottom'>
-                    <button className='postbutton' onClick={saveTuote}>Tallenna tuote</button>
+                <div>
+                    <button onClick={saveTuote}>Tallenna tuote</button>
                 </div>
             </div>
         </div>
     );
-};
-
+    
+}
 export {UusiTuote};
