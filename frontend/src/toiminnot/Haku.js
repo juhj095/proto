@@ -81,7 +81,7 @@ const Haku = () => {
             </thead>
             <tbody> 
             {hakuTulos.map((tuote) => (
-              <tr key={tuote.id} onClick={() => navigate(`/tuote/${tuote.Tuotetunnus}`)}>
+              <tr className='tuoteTable' key={tuote.id} onClick={() => navigate(`/tuote/${tuote.Tuotetunnus}`)}>
                   <td>{tuote.Tuotetunnus}</td>
                   <td>{tuote.Tuotenimi}</td>
                   <td>{tuote.Vahvuus}</td>

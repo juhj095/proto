@@ -24,6 +24,10 @@
     justify-content: center;
 }
 
+.tuoteTable:hover {
+  cursor: pointer;
+}
+
 
 .search-container {
     max-width: 70%;
